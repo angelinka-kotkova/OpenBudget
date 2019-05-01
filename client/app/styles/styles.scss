@@ -1,3 +1,455 @@
 @charset "UTF-8";
 
 @import 'vendor/normalize';
+.Ukraine_map .region-map__region{
+	transition: fill 0.3s ease-in-out;
+}
+.Ukraine_map .region-map__region:hover{
+	fill: #44cbcb;
+}
+.Ukraine_map .region-map__item--active{
+	fill: #bfbfbf;
+}
+.Ukraine_map{
+	max-width: 800px;
+	width: 50%;
+	z-index: 3;
+}
+.choose-buget{
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: center;
+}
+body {
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+  font-family: "Helvetica Neue", "Helvetica", sans-serif;
+  text-align: center;
+  }  
+div.logo{
+  width: 100%;
+  text-align: center;
+  height: 100px;
+}
+.parallax {
+  background-image: url("../../public/assets/img/pig.jpg");
+  min-height: 590px;  
+  height:50vh;
+  background-attachment: fixed; 
+  background-position: center; 
+  background-repeat: no-repeat; 
+  background-size: cover; 
+  position: relative;
+} 
+
+.parallax:after{
+z-index: 0;
+content: '';
+top:0;
+position: absolute;
+left:0;
+width:100%;
+height:100%;
+background-color: rgba(255,255,255,0.7);
+}
+.parallax-1 {
+  background-image: url("../../public/assets/img/back2.jpg");
+  min-height: 600px;  
+  height:50vh;
+  background-attachment: fixed; 
+  background-position: center; 
+  background-repeat: no-repeat; 
+  background-size: cover; 
+  position: relative;
+} 
+
+.parallax-1:after{
+z-index: 0;
+content: '';
+top:0;
+position: absolute;
+left:0;
+width:100%;
+height:100%;
+background-color: rgba(255,255,255,0.7);
+}
+.parallax-2 {
+  background-image: url("../../public/assets/img/pig.jpg");
+  min-height: 600px;  
+  height:50vh;
+  background-attachment: fixed; 
+  background-position: center; 
+  background-repeat: no-repeat; 
+  background-size: cover; 
+  position: relative;
+} 
+.parallax-2:after{
+z-index: 0;
+content: '';
+top:0;
+position: absolute;
+left:0;
+width:100%;
+height:100%;
+background-color: rgba(255,255,255,0.7);
+}
+.semiopacity-2 {
+  position: relative;
+  min-height: 600px;
+  z-index: 2;
+  padding: 0; /* Поля вокруг текста */
+}
+.semiopacity {
+  position: relative;
+  min-height: 550px;
+  z-index: 2;
+  padding: 0; /* Поля вокруг текста */
+}
+.in-semiopacity{
+  position: absolute;
+  top: 70px;
+  left:50%;
+  transform:translateX(-50%);
+  height: 550px;
+  text-align: center;
+}
+.in-semiopacity h2{
+  font-size: 22px;
+}
+.in-semiopacity h1{
+  font-size: 22px;
+}
+.arrow {
+  opacity: 0;
+  position: absolute;
+  left: 50%;
+  margin-top: 10px;
+  top: 25px;
+  transform-origin: 50% 50%;
+  transform: translate3d(-50%, -50%, 0);
+}
+.arrow-container{
+  position: relative;
+  height: 80px;
+  cursor: pointer;
+}
+.arrow-first {
+  animation: arrow-movement 2s ease-in-out infinite;
+}
+.arrow-second {
+  animation: arrow-movement 2s 1s ease-in-out infinite;
+}
+.arrow:before, .arrow:after {
+  background: #000;
+  content: '';
+  display: block;
+  height: 3px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 30px;
+}
+.arrow:before {
+  transform: rotate(45deg) translateX(-23%);
+  transform-origin: top left;
+}
+.arrow:after {
+  transform: rotate(-45deg) translateX(23%);
+  transform-origin: top right;
+}
+@keyframes arrow-movement {
+  0% {
+    opacity: 0;
+    top: 10px;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+
+.card {
+    max-width: 320px;
+    margin: 20px auto;
+    background-color: #eee;
+    transition: box-shadow .55s;
+    box-shadow:  0 4px 5px -2px rgba(0,0,0,.2),
+                -2px 0 5px -2px rgba(0,0,0,.2),
+                 2px 0 5px -2px rgba(0,0,0,.2);
+}
+.card:hover {
+    transition: box-shadow .45s;
+    box-shadow: 0 10px 17px 0 rgba(0,0,0,.2),
+                0 7px 20px 0 rgba(0,0,0,.19);
+}
+
+.answers .send {
+    position: absolute;
+    top: -28px;
+    right: 24px;
+}
+.send {
+    
+    line-height: 1;
+    width: 90px;
+    height: 50px;
+    cursor: pointer;
+    -webkit-transition: all .4s;
+    transition: all .4s;
+    color: #555;
+    border: none;
+    outline: none;
+    background: #fff;
+    position: relative;
+}
+.send .fa-img{
+  top:0;
+  height:100%;
+  width: 100%;
+  left: 0;
+}
+.send .fa-img img{
+  display: block;
+  height: 100%;
+  margin: 0 auto;
+}
+.send:hover{
+  transition: box-shadow .5s;
+  box-shadow: 0 10px 17px 0 rgba(0,0,0,.2),
+              0 7px 20px 0 rgba(0,0,0,.19);
+}
+
+.fa-img{
+  position: absolute;
+}
+.answers > div {
+    position: relative;
+    padding: 10px 20px;
+}
+div {
+    display: block;
+}
+ .card, .send {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .3);
+} 
+.card .head {
+    color: #eee;
+}
+.head {
+    background-color: rgba(50,200,200, .9);
+}
+.head {
+    font-size: 20px;
+    font-weight: 300;
+    line-height: 26px;
+    display: table;
+    width: 100%;
+    height: 135px;
+    margin: 0;
+    color: #03bffe;
+    border-bottom: 1px solid rgba(0, 0, 0, .15);
+}
+.head span {
+    display: table-cell;
+    padding: 0 30px;
+    vertical-align: middle;
+    text-align: center;
+}
+.answers {
+    position: relative;
+    padding: 40px 20px 40px;
+}
+form {
+    display: block;
+    margin-top: 0em;
+}
+
+
+.label-box, .label-box2  {
+    position: relative;
+    width: 100%;
+}
+.label-box::before, .label-box::after,
+.label-box2::before, .label-box2::after 
+{
+    content: "";
+    position: absolute;
+    height: 2px;
+    width: 50%;
+    bottom: 1px;
+    background-color: rgba(50,200,200, .9);
+}
+.label-box::before, .label-box2::before {
+    left: 50%;
+    width: 0;
+    transition: width 0.2s;
+}
+
+.label-box::after, .label-box2::after {
+    right: 50%;
+    width: 0;
+    transition: width 0.2s;
+}
+
+input:focus ~ .label-box::before,
+input:focus ~ .label-box::after, 
+input:focus ~ .label-box2::before,
+input:focus ~ .label-box2::after
+{
+    width: 50%;
+}
+input {
+    background-color: #eee;
+    width: 100%;
+    padding: 10px;
+    font-size: 18px;
+    border: none;
+    border-bottom: 1px solid rgba(50,200,200, .9);
+    box-sizing: border-box;
+    outline: none;
+}
+label {
+    position: absolute;
+    top: -32px;
+    font-size: 18px;
+    color: #757575;
+    transition: 0.2s ease all;
+    pointer-events: none;
+}
+input:focus ~ .label-box label,
+input:valid ~ .label-box label, 
+input:focus ~ .label-box2 label,
+input:valid ~ .label-box2 label
+{
+    font-size: 14px;
+    transform: translateY(-20px);
+}
+.choose-buget{
+  padding-top: 40px;
+  padding-bottom: 100px;
+}
+
+.flip-card {
+  padding-top: 50px;
+  background-color: transparent;
+  width: 250px;
+  height: 250px;
+  perspective: 1000px;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+
+.flip-card-front {
+  background-color: #bbb;
+  color: black;
+  z-index: 2;
+}
+
+.flip-card-back {
+  background-color: #cf6c75;
+  color: white;
+  transform: rotateY(180deg);
+  z-index: 1;
+}
+.me-information{
+  margin-left: 54%;
+}
+.program-information{
+  margin-left: 27%;
+}
+.footer{
+  padding: 30px;
+  text-align: center;
+  font-size: 16px;
+}
+  .instagram-img{
+    margin: 0 10px;
+    width: 40px;
+    height: 40px;
+  } 
+
+
+
+
+.custom-select select{
+    width: 100%;
+    border-radius: 15px;
+    padding: 10px;
+    background: #fff;
+    border: 2px solid red;
+    position: relative;
+    outline: none;
+
+}
+
+.custom-select .select-wrapper{
+	position: relative;
+	
+}
+.select-arrow{
+	position: absolute;
+	right: 7px;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 20px;
+	background: #fff;
+	height: 20px;
+	&:after{
+		position: absolute;
+		content: '';
+		width: 2px;
+		height: 10px;
+		left: 50%;
+		background: #000;
+		top: 50%;
+		transform: translate(-50%, -50%) rotate(45deg);
+   }
+   &:before{
+		position: absolute;
+		content: '';
+		width: 2px;
+		height: 10px;
+	    left: calc(50% - 6px);
+		background: #000;
+		top: 50%;
+		transform: translate(-50%, -50%) rotate(-45deg);
+   }
+}
+
+
+
+
+
+
+
+
+
+

@@ -36,7 +36,15 @@ module.exports = {
         include: helpers.root('client'),
         loader: 'babel-loader'
       },
-
+      {
+       test: /\.(png|svg|jpg|gif|eot|ttf|woff|woff2)$/,
+       loader: 'url-loader',
+       //include: path.join(__dirname, ''),
+       options: {
+        publicPath: './',
+        limit: 10000,
+       },
+      },
       // SCSS files
       {
         test: /\.scss$/,
