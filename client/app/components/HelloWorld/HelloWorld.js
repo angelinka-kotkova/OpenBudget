@@ -7,28 +7,10 @@ const App = () => (
   </div>
 ); 
 const HelloWorld = () => (
-	<div>
-  	<div className="parallax" id="parallax1">
-		<div data-depth="0.2" className="semiopacity">
-			<div className="in-semiopacity">
-				<img src="/assets/img/favicon.ico"/>
-				<hr/>
-				<h1>Дипломний проект</h1><br/>
-				<h2>на тему: "Комплекс задач кластеризації даних місцевих фінансів"</h2>
-			</div>
-		</div>
-	</div>
-	<div className="parallax-1">
-      <div className="arrow-container">
-        <div className="semiopacity">
-	        <a href="#myAnchor">
-	          <div className="arrow arrow-first"></div>
-	          <div className="arrow arrow-second"></div>
-	        </a>
-      	</div>
-  	</div>
-    <div name="myAnchor" id="myAnchor" className="choose-buget">
-      <div className="Ukraine_map">
+	<div className="page-wrapper">
+	  <div className="layer1">
+    <div className="layer1-top-parallax">
+            <div className="Ukraine_map">
         <ReactSVG src="./assets/img/ukraine.svg" />
       </div>
       <div className="semiopacity">
@@ -64,64 +46,37 @@ const HelloWorld = () => (
                 </form>
           </article>
       </div>
-    </div>  
     </div>
-		
-  <div className="parallax-2">
-    <div className="semiopacity-2">
-    
-    <div className="me-information">
-      <div className="flip-card">
-      <div className="flip-card-inner">
-        <div className="flip-card-front">
-          <img src="/assets/img/me1.png" alt="Avatar" style={{width:'250px',height:'250px'}}/>
+  </div>
+  <div className="layer2">
+    <div className="layer2-top">
+      <div className="hover-fold">
+        <div className="hide_top">
+          <h2>ДИПЛОМНИЙ ПРОЕКТ</h2>
         </div>
-          
-        <div className="flip-card-back">
-          <p>АВТОР</p> 
-          <h5>Коткова Ангеліна</h5>
-          <hr/>
-          <p>студентка 4 курсу</p> 
-          <p>групи ІС-51, ФІОТ, АСОІУ</p>
+        <div className="top">
+          <div className="front face"></div>
+          <div className="back face">
+            <p>Відкритий бюджет</p>
+            <p>Продукт призначений для аналізу місцевих бюджетів у результаті - формування аналізу, або кластеризація бюджету</p>
+          </div>
         </div>
-      </div>
-    </div>
-  </div>  
   
-  <div className="program-information">
-    <div className="flip-card">
-    <div className="flip-card-inner">
-      <div className="flip-card-front">
-        <img src="./assets/img/programm.png" alt="Avatar" style={{width:'250px',height:'250px'}}/>
-      </div>
-        
-      <div className="flip-card-back">
-        <p>ПРОГРАМА</p> 
-        <h5>Відкритий бюджет</h5>
-        <hr/>
-        <p>продукт призначений для аналізу місцевих бюджетів</p> 
-        <p>у результаті - формування аналізу, або кластеризація бюджету</p>
+          <div className="bottom"></div>
+  
       </div>
     </div>
-  </div>
-  </div>
+    
+    <div className="layer2-button">
+      <div className="book-bg">
+          <div className="book-cover"></div>
+          <div className="book-page-cover"></div>
+      </div>
+    </div>
+
 
 </div>
-</div>
-
-<div className="footer">
-    <a target="_blank" href="https://www.instagram.com/_k_ang/?hl=ru">
-      <img src="./assets/img/instagram.png" className="instagram-img" />
-    </a>
-    <a target="_blank" href="https://t.me/k_ang">
-      <img src="./assets/img/telegram.png" className="instagram-img" />
-    </a>
-    <a target="_blank" href="https://www.facebook.com/angelina.kotkova.5?ref=bookmarks">
-      <img src="./assets/img/facebook.png" className="instagram-img" />
-    </a>
-</div>
-	
-</div>
+  </div>
 );
 
 export default HelloWorld;
