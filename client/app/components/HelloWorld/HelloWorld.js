@@ -19,7 +19,7 @@ const HelloWorld = () => (
                 <form className="answers">
                   <button className="send">
                       <div className="fa-img">
-                        <img src="/assets/img/go2.png"/>
+                      <p>GO</p>
                       </div>              
                   </button>
                     <div className="custom-select">
@@ -47,16 +47,49 @@ const HelloWorld = () => (
           </article>
       </div>
     </div>
+    </div>
   <div className="layer2">
     <div className="layer2-top">
       <video autoPlay muted loop id="myVideo">
         <source src="./assets/img/Magic-Mouse-Scroll.mp4" type="video/mp4" />
       </video>
+      <div className="layer2-top-content">
+        <h1>ДИПЛОМНИЙ ПРОЕКТ</h1>
+        <p>Open Budget</p>
+      </div>
     </div>
     
     <div className="layer2-button">
-      
+      <div className="hover-fold">
+        <div className="hide_top">
+        <div className = "hide_top-top">
+          <h2>АВТОР ТА КЕРІВНИК</h2>
+            </div>
+            <div className = "hide_top-top-top">
+            <div className = "hide_top-left">
+            Коткова А.А.
+            </div>
+            <div className = "hide_top-right">
+            Олійник О.Ю.
+            </div>
+            </div>
+        </div>
+        <div className="top">
+          <div className="front face"></div>
+          <div className="back face">
+            <div className = "bottom-img-left">
+            </div>
+            <div className = "bottom-img-right">
+            </div>
+          </div>
+        </div>
+          <div className="bottom">
+          <p>А ТУТ ІНФОРМАЦІЯ ПРО ВИКОНАВЦІВ ПРОЕКТУ</p>
+          </div>
+      </div>
     </div>
+  </div>
+  <div className = "layer3">
   </div>
   </div>
   
