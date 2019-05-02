@@ -7,8 +7,8 @@ const App = () => (
   </div>
 ); 
 const HelloWorld = () => (
-	<div className="page-wrapper">
-	  <div className="layer1">
+  <div className="page-wrapper">
+    <div className="layer1">
     <div className="layer1-top-parallax">
             <div className="Ukraine_map">
         <ReactSVG src="./assets/img/ukraine.svg" />
@@ -47,36 +47,19 @@ const HelloWorld = () => (
           </article>
       </div>
     </div>
-  </div>
   <div className="layer2">
     <div className="layer2-top">
-      <div className="hover-fold">
-        <div className="hide_top">
-          <h2>ДИПЛОМНИЙ ПРОЕКТ</h2>
-        </div>
-        <div className="top">
-          <div className="front face"></div>
-          <div className="back face">
-            <p>Відкритий бюджет</p>
-            <p>Продукт призначений для аналізу місцевих бюджетів у результаті - формування аналізу, або кластеризація бюджету</p>
-          </div>
-        </div>
-  
-          <div className="bottom"></div>
-  
-      </div>
+      <video autoPlay muted loop id="myVideo">
+        <source src="./assets/img/Magic-Mouse-Scroll.mp4" type="video/mp4" />
+      </video>
     </div>
     
     <div className="layer2-button">
-      <div className="book-bg">
-          <div className="book-cover"></div>
-          <div className="book-page-cover"></div>
-      </div>
+      
     </div>
-
-
-</div>
   </div>
+  </div>
+  
 );
 
 export default HelloWorld;

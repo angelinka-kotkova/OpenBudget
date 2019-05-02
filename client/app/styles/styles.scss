@@ -88,11 +88,11 @@ body{
   width: 100%;
   height: 100%;
   color: #fff;
-  background: linear-gradient(-35deg, #EE7752, #c62e54, #4e8396, #cacaca);
+  background: linear-gradient(-35deg, #f4dece, #cac8d5, #e1bcb3, #f6ead1);
   background-size: 400% 400%;
   -webkit-animation: Gradient 15s ease infinite;
   -moz-animation: Gradient 15s ease infinite;
-  animation: Gradient 20s ease infinite;
+  animation: Gradient 10s ease infinite;
   display: flex;
   flex-flow: column;
 }
@@ -158,97 +158,7 @@ body{
   box-sizing: border-box;
   color: #333;
 }
-.hover-fold {
-  background: #e8c63d;
-  height: 100%;
-  margin: 0;
-  -moz-perspective: 1500;
-  -webkit-perspective: 1500;
-  perspective: 1500;
-  position: relative;
-  width: 100%;
-}
-.hover-fold h2 {
-  border-bottom: 1px solid #333;
-  margin: 0;
-  padding: 110px 0 2px;
-}
-.hover-fold .top {
-  height: 50%;
-  -moz-transition: all 0.5s ease-out;
-  -o-transition: all 0.5s ease-out;
-  -webkit-transition: all 0.5s ease-out;
-  transition: all 0.5s ease-out;
-  -moz-transform: rotateX(0deg);
-  -ms-transform: rotateX(0deg);
-  -webkit-transform: rotateX(0deg);
-  transform: rotateX(0deg);
-  -moz-transform-origin: 0 100%;
-  -ms-transform-origin: 0 100%;
-  -webkit-transform-origin: 0 100%;
-  transform-origin: 0 100%;
-  -moz-transform-style: preserve-3d;
-  -webkit-transform-style: preserve-3d;
-  transform-style: preserve-3d;
-  position: absolute;
-  top: 0px;
-  width: 100%;
-  z-index: 10;
-}
-.top{
-  font-family: "Open Sans", sans-serif;
-  font-size: 16px;
-}
-.hover-fold .top .face {
-  -moz-backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  position: absolute;
-}
-.hover-fold{
-  position: relative;
-}
-.hide_top{
-  height: 50%;
 
-}
-.hover-fold:hover .top {
-  -moz-transform: rotateX(-180deg);
-  -ms-transform: rotateX(-180deg);
-  -webkit-transform: rotateX(-180deg);
-  transform: rotateX(-180deg);
-}
-.hover-fold .front {
-  background: url(../../public/assets/img/gifki-kosmos-9.gif);
-  height: 100%;
-  /*has to be 100% of .top */
-  width: 100%;
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-
-.hover-fold .back {
-  background: #e8c63d;
-  height: 100%;
-  padding: 0 40px;
-  -moz-transform: rotateX(180deg);
-  -ms-transform: rotateX(180deg);
-  -webkit-transform: rotateX(180deg);
-  transform: rotateX(180deg);
-  width: 100%;
-}
-.hover-fold .back p {
-  margin: 0;
-}
-.hover-fold .bottom {
-  background: url(../../public/assets/img/gifki-kosmos-9.gif) bottom;
-  height: 50%;
-  position: absolute;
-  top: 50%;
-  width: 100%;
-  z-index: 0;
-  background-size: cover;
-}
 .layer2-button{
   .book-bg {
     position: relative;
@@ -261,7 +171,7 @@ body{
     position: absolute;
     transform-style: preserve-3d;
     perspective: 500px;
-    
+
     width: 100%;
     height: 100%;
     background: red no-repeat;
@@ -352,7 +262,7 @@ body{
 } 
 .card .head {
     color: #eee;
-    background-color: rgba(50,200,200, .9);
+    background-color: rgba(122,156,148,.9);
     font-size: 20px;
     font-weight: 300;
     line-height: 26px;
@@ -386,7 +296,7 @@ form {
     padding: 2px 10px;
     background: #fff;
     margin-top: 10px;
-    border: 1px solid #cbb9b9;
+    border: 1px solid #7a9c94;
     position: relative;
     outline: none;
     font-size: 16px;
@@ -426,3 +336,13 @@ form {
     transform: translate(-50%, -50%) rotate(-45deg);
    }
 }
+
+#myVideo {
+  display: block;
+  position: relative;
+  right: 0;
+  bottom: 0;
+  width: 100%; 
+  min-height: 100%;
+}
+
