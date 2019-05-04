@@ -222,9 +222,7 @@ body{
     right: 24px;
 }
 .send {
-    a{
-      text-decoration: none;
-    }
+    
     line-height: 1;
     width: 90px;
     height: 35px;
@@ -747,13 +745,6 @@ nav ul {
   opacity: 0;  
   transform: translateY(10px);
   transition: .3s ease-in-out;
-  transform: translateY(10px);
-  transition: .3s ease-in-out;
-   background: linear-gradient(-35deg, #f4dece, #cac8d5, #e1bcb3, #f6ead1);
-  background-size: 400% 400%;
-  -webkit-animation: Gradient 3s ease infinite;
-  -moz-animation: Gradient 3s ease infinite;
-  animation: Gradient 3s ease infinite;
 }
 .submenu li {position: relative;}
 .submenu a {
@@ -913,7 +904,6 @@ nav li:hover > .submenu {
     margin: 5px;
 }
 .send1 p{
-  margin: 0;
   color: white;
   a{
     font-size: 13px;

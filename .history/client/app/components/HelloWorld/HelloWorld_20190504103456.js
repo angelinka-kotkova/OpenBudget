@@ -1,11 +1,5 @@
 import React from 'react';
 import ReactSVG from 'react-svg'
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Switch
-} from 'react-router-dom'
 const App = () => (
   <div>
     {/* Logo is an actual React component */}

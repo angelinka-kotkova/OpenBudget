@@ -222,9 +222,7 @@ body{
     right: 24px;
 }
 .send {
-    a{
-      text-decoration: none;
-    }
+    
     line-height: 1;
     width: 90px;
     height: 35px;
@@ -512,18 +510,7 @@ form {
 
 
 .income__page{
-  margin: 0;
-  padding: 0;
-  font-size: 20px;
-  font-family: "Comfortaa";
-  text-align: center;
-  background: linear-gradient(-35deg, #f4dece, #cac8d5, #e1bcb3, #f6ead1);
-  background-size: 400% 400%;
-  -webkit-animation: Gradient 3s ease infinite;
-  -moz-animation: Gradient 3s ease infinite;
-  animation: Gradient 3s ease infinite;
-  display: flex;
-  flex-flow: column;
+  
 .layer1 {
   width: 50%;
   height: 100%;
@@ -663,6 +650,7 @@ form {
   transform: rotateX(-180deg);
 }
 .hover-fold .front {
+  background: url(./images/gifki-kosmos-9.gif);
   height: 100%;
   /*has to be 100% of .top */
   width: 100%;
@@ -684,6 +672,7 @@ form {
   margin: 0;
 }
 .hover-fold .bottom {
+  background: url(./images/gifki-kosmos-9.gif) bottom;
   height: 50%;
   position: absolute;
   top: 50%;
@@ -747,13 +736,6 @@ nav ul {
   opacity: 0;  
   transform: translateY(10px);
   transition: .3s ease-in-out;
-  transform: translateY(10px);
-  transition: .3s ease-in-out;
-   background: linear-gradient(-35deg, #f4dece, #cac8d5, #e1bcb3, #f6ead1);
-  background-size: 400% 400%;
-  -webkit-animation: Gradient 3s ease infinite;
-  -moz-animation: Gradient 3s ease infinite;
-  animation: Gradient 3s ease infinite;
 }
 .submenu li {position: relative;}
 .submenu a {
@@ -913,13 +895,8 @@ nav li:hover > .submenu {
     margin: 5px;
 }
 .send1 p{
-  margin: 0;
   color: white;
-  a{
-    font-size: 13px;
-    color: #fff;
-    text-decoration: none;
-  }
+  margin-top: 10px;
 }
 .table{
   margin: 50px auto;

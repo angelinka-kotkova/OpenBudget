@@ -1,11 +1,5 @@
 import React from 'react';
 import ReactSVG from 'react-svg'
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Switch
-} from 'react-router-dom'
 const App = () => (
   <div>
     {/* Logo is an actual React component */}
@@ -25,7 +19,7 @@ const HelloWorld = () => (
                 <form className="answers">
                   <button className="send">
                       <div className="fa-img">
-                      <p><Link to="/income">GO</Link></p>
+                      <p>GO</p>
                       </div>              
                   </button>
                     <div className="custom-select">
