@@ -90,13 +90,16 @@ const HelloWorld = () => (
             <div className = "bottom-img-left">
               <div class="card">
                 <div class="side"><img src="./assets/img/ol.jpg" alt="Jimmy Eat World"/></div>
-                  <div class="side back">Jimmy Eat World</div>
+                  <div class="side back">
+                    <p>Старший викладач кафедри автоматизованих систем обробки інформаціі та управління Національного технічного університету України “Київський політехнічний інститут імені Ігоря Сікорського”</p></div>
                 </div>
             </div>
             <div className = "bottom-img-right">
             <div class="card">
               <div class="side"><img src="./assets/img/me.png" alt="Jimmy Eat World"/></div>
-                <div class="side back">Jimmy Eat World</div>
+                <div class="side back">
+                  <p>Старший викладач кафедри автоматизованих систем обробки інформаціі та управління Національного технічного університету України “Київський політехнічний інститут імені Ігоря Сікорського”</p>
+                </div>
               </div>
             </div>
           </div>

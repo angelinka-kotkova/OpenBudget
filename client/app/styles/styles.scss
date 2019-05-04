@@ -502,7 +502,7 @@ form {
   background: #eaeaed;
   color: #000;
   font-family: Open Sans;
-  line-height: 150px;
+  font-size: 10px;  
   text-align: center;
   transform: rotateY(180deg);
   }
@@ -727,7 +727,7 @@ margin-left: 20px;
 .hover-fold .back {
   background: #e8c63d;
   height: 100%;
-  padding: 0 40px;
+  padding: 0;
   -moz-transform: rotateX(180deg);
   -ms-transform: rotateX(180deg);
   -webkit-transform: rotateX(180deg);
