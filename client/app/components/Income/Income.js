@@ -17,8 +17,8 @@ const Income = () => (
         <div className="layer-one-top-parallax">
           <nav>
             <ul className="topmenu">
-              <li><a href="">ГОЛОВНА </a></li>
-              <li><a href="income.html" className="active">ДОХОДИ</a>
+              <li><Link to="/">ГОЛОВНА </Link></li>
+              <li><Link to="/income" className="active">ДОХОДИ</Link>
                 <ul className="submenu">
                   <li><a href="">виконання бюджету</a></li>
                   <li><a href="">структура бюджету</a></li>

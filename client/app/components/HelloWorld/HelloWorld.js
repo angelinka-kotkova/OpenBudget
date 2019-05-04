@@ -13,7 +13,7 @@ const App = () => (
   </div>
 ); 
 const HelloWorld = () => (
-  <div className="page-wrapper">
+  <div className="page-wrapper one__screen">
         <div class="center_img-wrapper">
           <img src="./assets/img/logo.png" alt="" />
       </div>

@@ -9,12 +9,11 @@
 @import url(https://fonts.googleapis.com/css?family=Didact+Gothic|Comfortaa:400,700&subset=latin,cyrillic);
 @import url(https://fonts.googleapis.com/css?family=Open+Sans|Playfair+Display:400,700,400italic,700italic&subset=latin,cyrillic);
 main{
-  height: 100vh;
 }
 body{
-  height: 100vh;
-  overflow: hidden;
+  min-height: 100vh;
 }
+
 .background.region-map__map{
   height:350px;
 }
@@ -79,7 +78,9 @@ body{
   display: flex;
   flex-flow: row nowrap;
 }
-
+.one__screen{
+  height: 100vh;
+}
 .layer1 {
   width: 50%;
   height: 100%;
@@ -996,6 +997,14 @@ tr td{
 
 .tbody tr th{
   position: absolute;
+}
+.table tr:nth-child(2n+1){
+  background: rgba(255,255,255,0.2);
+}
+
+/* четная строка таблицы класса stripy */
+.table tr:nth-child(2n){
+  background: rgba(122,156,148,0.1);
 }
 }
 .center_img-wrapper{

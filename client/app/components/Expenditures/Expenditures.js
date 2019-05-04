@@ -18,14 +18,14 @@ const Expenditures = () => (
 
           <nav>
           <ul className="topmenu">
-            <li><a href="">ГОЛОВНА </a></li>
-            <li><a href="income.html">ДОХОДИ</a>
+            <li><Link to="/">ГОЛОВНА </Link></li>
+            <li><Link to="/income">ДОХОДИ</Link>
               <ul className="submenu">
                 <li><a href="">виконання бюджету</a></li>
                 <li><a href="">структура бюджету</a></li>
               </ul>
               </li>
-            <li><a href="expenditures.html" className="active">ВИДАТКИ</a>
+            <li><Link to="/expenditures" className="active">ВИДАТКИ</Link>
               <ul className="submenu">
                 <li><a href="">виконання бюджету</a></li>
                 <li><a href="">структура бюджету</a></li>
