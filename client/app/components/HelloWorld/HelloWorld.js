@@ -14,6 +14,9 @@ const App = () => (
 ); 
 const HelloWorld = () => (
   <div className="page-wrapper">
+        <div class="center_img-wrapper">
+          <img src="./assets/img/logo.png" alt="" />
+      </div>
     <div className="layer1">
     <div className="layer1-top-parallax">
             <div className="Ukraine_map">
@@ -69,14 +72,15 @@ const HelloWorld = () => (
       <div className="hover-fold">
         <div className="hide_top">
         <div className = "hide_top-top">
-          <h2>АВТОР ТА КЕРІВНИК</h2>
+          <h2>КЕРІВНИК ТА АВТОР</h2>
             </div>
             <div className = "hide_top-top-top">
             <div className = "hide_top-left">
-            Коткова А.А.
+            Олійник О.Ю.
+            
             </div>
             <div className = "hide_top-right">
-            Олійник О.Ю.
+            Коткова А.А.
             </div>
             </div>
         </div>
@@ -84,8 +88,16 @@ const HelloWorld = () => (
           <div className="front face"></div>
           <div className="back face">
             <div className = "bottom-img-left">
+              <div class="card">
+                <div class="side"><img src="./assets/img/ol.jpg" alt="Jimmy Eat World"/></div>
+                  <div class="side back">Jimmy Eat World</div>
+                </div>
             </div>
             <div className = "bottom-img-right">
+            <div class="card">
+              <div class="side"><img src="./assets/img/me.png" alt="Jimmy Eat World"/></div>
+                <div class="side back">Jimmy Eat World</div>
+              </div>
             </div>
           </div>
         </div>

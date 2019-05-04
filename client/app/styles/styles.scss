@@ -22,7 +22,7 @@ body{
   transition: fill 0.3s ease-in-out;
 }
 .Ukraine_map .region-map__region:hover{
-  fill: #44cbcb;
+  fill: #7a9c94;
 }
 .Ukraine_map .region-map__item--active{
   fill: #bfbfbf;
@@ -473,24 +473,77 @@ form {
     justify-content: center;
 }
 .bottom-img-left{
-  background: url(../../public/assets/img/me.png);
-  background-size: cover;
-  background-repeat: no-repeat;
+.card{
+  max-height: 156px;
+
+      position: relative;
+    height: 100%;
+}
   width: 30%;
   height: 100%;
-
+  transform-style: preserve-3d;
+  transition: all 1s ease-in-out;
+  &:hover{
+  transform: rotateY(180deg);
+  }
+  .side{
+   backface-visibility: hidden;
+  border-radius: 6px;
+  height: 100%;
+  position: absolute;
+  width: 100%;
+  img{
+  display:block;
+  width: 100%;
+  }
+  }
+  .back{
+  background: #eaeaed;
+  color: #000;
+  font-family: Open Sans;
+  line-height: 150px;
+  text-align: center;
+  transform: rotateY(180deg);
+  }
 }
+
 .bottom p{
   color: white;
   font-size: 22px;
 }
 .bottom-img-right{
-  background: url(../../public/assets/img/me.png);
-  background-size: cover;
-  background-repeat: no-repeat;
+margin-left: 20px;
+  .card{
+  max-height: 156px;
+      position: relative;
+    height: 100%;
+}
   width: 30%;
   height: 100%;
-  margin-left: 20px;
+  transform-style: preserve-3d;
+  transition: all 1s ease-in-out;
+  &:hover{
+  transform: rotateY(180deg);
+  }
+  .side{
+   backface-visibility: hidden;
+  border-radius: 6px;
+  height: 100%;
+  position: absolute;
+  width: 100%;
+  img{
+  display:block;
+  width: 100%;
+  }
+  }
+  .back{
+  background: #eaeaed;
+  color: #000;
+  font-family: Open Sans;
+  line-height: 150px;
+  text-align: center;
+  transform: rotateY(180deg);
+  }
 }
 .hide_top-left{
   height: 100%;
@@ -944,4 +997,23 @@ tr td{
 .tbody tr th{
   position: absolute;
 }
+}
+.center_img-wrapper{
+  position: absolute;
+  background-color: #fff;
+  z-index: 10;
+  top: 50%;
+  display: flex;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  height: 90px;
+  width: 90px;
+  justify-content: center;
+  align-items: center;
+  img{
+    display: block;
+    width: 40px;
+    height: auto;
+  }
 }
