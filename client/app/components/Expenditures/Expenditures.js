@@ -5,12 +5,6 @@ import {
   Link,
   Switch
 } from 'react-router-dom'
-const App = () => (
-  <div>
-    {/* Logo is an actual React component */}
-    <Logo />
-  </div>
-); 
 const Expenditures = () => (
   <div className="page-wrapper income__page">
      <div className="layer-one">
@@ -48,7 +42,7 @@ const Expenditures = () => (
         </div>
 
         <div className="all">
-        <div class ="choose-periods">
+        <div className ="choose-periods">
         <div className="custom-select">
           <p>Рік:</p>
           <p>За період:</p>
@@ -155,5 +149,4 @@ const Expenditures = () => (
       </div>
   </div>
 );
-
 export default Expenditures;

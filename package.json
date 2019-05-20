@@ -22,6 +22,7 @@
     "@babel/preset-react": "^7.0.0-beta.42",
     "autoprefixer": "^8.2.0",
     "babel-loader": "^8.0.0-beta.2",
+    "bourbon": "^4.3.4",
     "connect-history-api-fallback": "^1.5.0",
     "copy-webpack-plugin": "^4.5.1",
     "css-loader": "^0.28.11",
@@ -40,6 +41,7 @@
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
     "react-svg": "^9.0.4",
+    "recharts": "^1.6.0",
     "sass-loader": "^6.0.7",
     "style-loader": "^0.20.3",
     "url-loader": "^1.1.2",
@@ -49,5 +51,8 @@
     "webpack-hot-middleware": "^2.21.2",
     "webpack-merge": "^4.1.2",
     "whatwg-fetch": "^2.0.3"
+  },
+  "devDependencies": {
+    "react-inlinesvg": "^0.8.4"
   }
 }

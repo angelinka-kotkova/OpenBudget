@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 @import 'vendor/normalize';
-
+@import 'preloader';
 
 
 
@@ -19,6 +19,8 @@ body{
 }
 .Ukraine_map .region-map__region{
   transition: fill 0.3s ease-in-out;
+  cursor: pointer;
+  pointer-events: bounding-box;
 }
 .Ukraine_map .region-map__region:hover{
   fill: #7a9c94;
@@ -974,6 +976,9 @@ nav li:hover > .submenu {
     background: #c72e53;
     position: relative;
     margin: 5px;
+    font-size: 13px;
+    color: #fff;
+    
 }
 .send1 p{
   margin: 0;
