@@ -31,20 +31,31 @@ export default class Income extends Component {
     this.state = {
       explanationFlag: false,
       structureFlag: false,
+      response: '',
+      post: '',
+      responseToPost: '',
     };
   }
+  componentDidMount () { 
+    const { cityKey } = this.props.location.state
+      fetch(`/api/hello`)
+        .then(res => res.json())
+        .then(json => this.setState({ response: json }));
+  }
+
   handleClick() {
     this.setState(state => ({
       structureFlag: !state.structureFlag
     }));
   }
   render(){
+    const {city} = this.props.location.state;
     return <div className="page-wrapper income__page">
       <div className="layer-one">
           <div className="layer-one-top-parallax">
             <nav>
               <ul className="topmenu">
-                <li><Link to="/">ГОЛОВНА </Link></li>
+                <li><Link to="/">ГОЛОВНА</Link></li>
                 <li><Link to="/income" className="active">ДОХОДИ</Link>
                   <ul className="submenu">
                     <li><a href="">виконання бюджету</a></li>
@@ -61,7 +72,7 @@ export default class Income extends Component {
                 <li><a href="">КЛАСТЕРИЗАЦІЯ</a></li>
               </ul>
             </nav>
-            <h3>Бюджет міста Києва</h3>
+            <h3>Бюджет м. {city}</h3>
             <div className="buttons-top">
               <button className="send1" onClick={this.handleClick}>ВИКОНАННЯ БЮДЖЕТУ         
               </button>

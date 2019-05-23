@@ -4,10 +4,9 @@ import {
   Route,
   Link,
   Switch
-} from 'react-router-dom'
+} from 'react-router-dom';
 import Preloader from '../Preloader/Preloader';
 import UkraineMap from '../UkraineMap/UkraineMap';
-import ReactDOM from 'react-dom'
 function preloaderCall() {
   return new Promise(
     function(resolve, reject) {
@@ -23,22 +22,51 @@ export default class HelloWorld extends Component {
     this.state = {
       currentRegion : 'Київ',
       loading: true,
-      svgPathClass: 'region-map__item--active',};
+      currentCity: 'Київ',
+      cityKey: '09304502000',
+    };
+    this.routeChange = this.routeChange.bind(this);
+    this.regionCity = React.createRef();
+    this.region = React.createRef();
     this.svgMap = React.createRef();
+    this.changeRegionFromMap = this.changeRegionFromMap.bind(this);
     this.changeRegion = this.changeRegion.bind(this);
+    this.changeCity = this.changeCity.bind(this);
     this.chooseCities = this.chooseCities.bind(this);
     this.chooseRegion = this.chooseRegion.bind(this);
   };
+  routeChange() {
+    let path = `newPath`;
+    this.props.history.push(path);
+  }
   componentDidMount() {
     preloaderCall().then(() => {
       this.setState({ loading: false }); 
     });
   }
   changeRegion(){
-    let regionSelect = document.getElementById('region');
+    let regionSelect = this.region.current;
     let regionOption = regionSelect.options[regionSelect.selectedIndex].value;
     this.setState({currentRegion: regionOption});
   };
+  changeCity(){
+    let citySelect = this.regionCity.current;
+    let cityOption = citySelect.options[citySelect.selectedIndex].value;
+    this.setState({currentCity: cityOption});
+  };
+  changeRegionFromMap(value){
+    console.log(value);
+    this.setState({currentRegion: value});
+    let regionSelect = this.region.current;
+    regionSelect.options[regionSelect.selectedIndex].value = regionSelect.option
+    for (let opt, j = 0; opt = regionSelect.options[j]; j++) {
+      if (opt.value == value) {
+        regionSelect.selectedIndex = j;
+        break;
+      }
+      else regionSelect.selectedIndex = 0
+    }
+  }
   chooseRegion(){
     return (
       [
@@ -318,7 +346,7 @@ export default class HelloWorld extends Component {
            </div>
            <div className="layer1">
               <div className="layer1-top-parallax">
-                 <UkraineMap svgref={this.svgMap} />
+                 <UkraineMap onChange = {this.changeRegionFromMap} svgref={this.svgMap} />
                  <div className="semiopacity">
                     <article className="card">
                        <h1 className="head"><span>Оберіть місцевий бюджет</span></h1>
@@ -326,24 +354,35 @@ export default class HelloWorld extends Component {
                           <button className="send">
                              <div className="fa-img">
                                 <p>
-                                   <Link to="/income">
+                                   <Link
+                                      to={{
+                                        pathname: '/income',
+                                        state: {
+                                          city: this.state.currentCity,
+                                          cityKey: this.state.cityKey,
+                                          fromNotifications: true
+                                        }
+                                      }}
+                                    >
                                    GO</Link>
                                 </p>
                              </div>
                           </button>
                           <div className="custom-select">
-                             <div className="select-wrapper" >
-                                <select id="regionCity">
+                            <div className="select-wrapper" >
+                                <select id="regionCity" ref={this.regionCity} onChange = {this.changeCity}>
                                   {this.chooseCities()}
                                 </select>
                                 <div className="select-arrow"></div>
                              </div>
-                             <div className="select-wrapper">
-                                <select id="region" onChange = {this.changeRegion} placeholder="Виберіть бюджет">
-                                  {this.chooseRegion()}
-                                </select>
-                                <div className="select-arrow"></div>
+                            <div className="select-wrapper">
+                                  <select ref={this.region} onChange = {this.changeRegion} placeholder="Виберіть бюджет">
+                                    {this.chooseRegion()}
+                                  </select>
+                                  <div className="select-arrow"></div>
                              </div>
+                             
+                             
                           </div>
                        </form>
                     </article>
