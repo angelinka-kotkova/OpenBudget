@@ -10,7 +10,7 @@ import {
 import App from './components/App/App';
 import NotFound from './components/App/NotFound';
 import Home from './components/Home/Home';
-import HelloWorld from './components/HelloWorld/HelloWorld';
+import MainPage from './components/MainPage/MainPage';
 import Income from './components/Income/Income';
 import Expenditures from './components/Expenditures/Expenditures';
 import './styles/styles.scss';
@@ -18,7 +18,7 @@ render((
   <Router>
     <App>
       <Switch>
-        <Route exact path="/" component={HelloWorld}/>
+        <Route exact path="/" component={MainPage}/>
         <Route path="/income" component={Income}/>
         <Route path="/expenditures" component={Expenditures}/>
         <Route component={NotFound}/>

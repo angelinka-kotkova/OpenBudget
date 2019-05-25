@@ -33,34 +33,31 @@ export default class Income extends Component {
       structureFlag: false,
       incomeDocument: '',
       city: "Киев",
-      cityKey: '26400100000'
+      cityKey: '26400100000',
+      data: {
+        nothing: "asdasd"
+      },
     };
     this.handleClick = this.handleClick.bind(this);
   }
   componentDidMount () {
-    console.log(this.props.location); 
     if(this.props.location){
       this.setState((state) => {
         city: this.props.location.city
         cityKey: this.props.location.cityKey
       })
-    }
-    fetch('/api/incomes',{
-    method: 'POST',
-    body: JSON.stringify({
-      cityKey: this.props.location.state.cityKey
-    }),
-    headers: {"Content-Type": "application/json"}
-    })
-    .then(function(response){
-      console.log(response.json);
-      return response.json()
-    }).then(function(body){
-      console.log(body);
-    });
+      fetch('api/incomes/' + this.state.cityKey)
+      .then(response => response.json())
+      .then(data => {
+        this.setState({
+          data: data,
+        })
+      })
+      .catch(error => console.log(error));
+      }
   }
-  
   handleClick(event) {
+    console.log(this.state.data);
     if (event.target.name == "explanation"){
       this.setState({
         explanationFlag: true,
@@ -82,7 +79,6 @@ export default class Income extends Component {
     }
   }
   render(){
-    const {city} = this.props.location.state;
     let table =            
             <table className="table">
               <thead>
@@ -225,6 +221,7 @@ export default class Income extends Component {
                   }
                 </Pie>
               </PieChart>
+    console.log(this.state.data)
     if (this.state.structureFlag){
       return
         <div className="page-wrapper income__page">
@@ -249,7 +246,7 @@ export default class Income extends Component {
                   <li><a href="">КЛАСТЕРИЗАЦІЯ</a></li>
                 </ul>
               </nav>
-              <h3>Бюджет м. {city}</h3>
+              <h3>Бюджет м. {this.state.city}</h3>
               <div className="buttons-top">
                 <button className="send1" name="explanation" onClick={this.handleClick}>ВИКОНАННЯ БЮДЖЕТУ         
                 </button>
@@ -344,7 +341,7 @@ export default class Income extends Component {
                 <li><a href="">КЛАСТЕРИЗАЦІЯ</a></li>
               </ul>
             </nav>
-            <h3>Бюджет м. {city}</h3>
+            <h3>Бюджет м. {this.state.city}</h3>
             <div className="buttons-top">
               <button className="send1" name="explanation" onClick={this.handleClick}>ВИКОНАННЯ БЮДЖЕТУ         
               </button>
@@ -456,7 +453,7 @@ export default class Income extends Component {
                 <li><a href="">КЛАСТЕРИЗАЦІЯ</a></li>
               </ul>
             </nav>
-            <h3>Бюджет м. {city}</h3>
+            <h3>Бюджет м. {this.state.city}</h3>
             <div className="buttons-top">
               <button className="send1" name="explanation" onClick={this.handleClick}>ВИКОНАННЯ БЮДЖЕТУ         
               </button>
@@ -524,6 +521,7 @@ export default class Income extends Component {
               </div>
             </div>
             {table}
+            [this.state.data]
           </div>
       </div>
     </div>

@@ -18,7 +18,10 @@ const port  = process.env.PORT || 8080;
 // ================================================================================================
 
 // Set up Mongoose
-mongoose.connect(isDev ? config.db_dev : config.db);
+mongoose.connect(isDev ? config.db_dev : config.db, (err) => {
+  if(err) console.log(err)
+  console.log('success')
+});
 mongoose.Promise = global.Promise;
 
 const app = express();
