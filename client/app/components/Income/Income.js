@@ -31,114 +31,59 @@ export default class Income extends Component {
     this.state = {
       explanationFlag: false,
       structureFlag: false,
-      response: '',
-      post: '',
-      responseToPost: '',
+      incomeDocument: '',
+      city: "Киев",
+      cityKey: '26400100000'
     };
+    this.handleClick = this.handleClick.bind(this);
   }
-  componentDidMount () { 
-    const { cityKey } = this.props.location.state
-      fetch(`/api/hello`)
-        .then(res => res.json())
-        .then(json => this.setState({ response: json }));
+  componentDidMount () {
+    console.log(this.props.location); 
+    if(this.props.location){
+      this.setState((state) => {
+        city: this.props.location.city
+        cityKey: this.props.location.cityKey
+      })
+    }
+    fetch('/api/incomes',{
+    method: 'POST',
+    body: JSON.stringify({
+      cityKey: this.props.location.state.cityKey
+    }),
+    headers: {"Content-Type": "application/json"}
+    })
+    .then(function(response){
+      console.log(response.json);
+      return response.json()
+    }).then(function(body){
+      console.log(body);
+    });
   }
-
-  handleClick() {
-    this.setState(state => ({
-      structureFlag: !state.structureFlag
-    }));
+  
+  handleClick(event) {
+    if (event.target.name == "explanation"){
+      this.setState({
+        explanationFlag: true,
+        structureFlag: false,
+      });
+    }
+    else if (event.target.name == "structure")
+    {
+      this.setState({
+        structureFlag: true,
+        explanationFlag: false,
+      });
+    }
+    else {
+      this.setState({
+        structureFlag: false,
+        explanationFlag: false,
+      });
+    }
   }
   render(){
     const {city} = this.props.location.state;
-    return <div className="page-wrapper income__page">
-      <div className="layer-one">
-          <div className="layer-one-top-parallax">
-            <nav>
-              <ul className="topmenu">
-                <li><Link to="/">ГОЛОВНА</Link></li>
-                <li><Link to="/income" className="active">ДОХОДИ</Link>
-                  <ul className="submenu">
-                    <li><a href="">виконання бюджету</a></li>
-                    <li><a href="">структура бюджету</a></li>
-                  </ul>
-                </li>
-                <li><Link to="/expenditures">ВИДАТКИ</Link>
-                  <ul className="submenu">
-                    <li><a href="">виконання бюджету</a></li>
-                    <li><a href="">структура бюджету</a></li>
-                  </ul>
-                </li>
-                <li><a href="">ДИНАМІКА</a></li>
-                <li><a href="">КЛАСТЕРИЗАЦІЯ</a></li>
-              </ul>
-            </nav>
-            <h3>Бюджет м. {city}</h3>
-            <div className="buttons-top">
-              <button className="send1" onClick={this.handleClick}>ВИКОНАННЯ БЮДЖЕТУ         
-              </button>
-              <button className="send1">
-                  СТРУКТУРА БЮДЖЕТУ         
-              </button>
-            </div>
-            <div className="all">
-              <div className ="choose-periods">
-                <div className="custom-select">
-                  <p>Рік:</p>
-                  <p>За період:</p>
-                  <p></p>
-                  <p>Фонд:</p>
-                  <p>Код:</p>
-                </div>
-                <div className="custom-select">
-                  <div className="select-wrapper">
-                    <select>
-                      <option value="" disabled defaultValue>Рік</option>
-                      <option value="1">2018</option>
-                      <option value="2">2019</option>
-                    </select>
-                  </div>
-                  <div className="select-wrapper">
-                    <select>
-                      <option value="" disabled defaultValue>Початок</option>
-                      <option value="1">Січень</option>
-                      <option value="2">Лютий</option>
-                      <option value="3">Березень</option>
-                    </select>
-                  </div>
-                  <div className="select-wrapper">
-                    <select>
-                      <option value="" disabled defaultValue>Кінець</option>
-                      <option value="1">Січень</option>
-                      <option value="2">Лютий</option>
-                      <option value="3">Березень</option>
-                    </select>
-                  </div>
-                  <div className="select-wrapper">
-                    <select>
-                      <option value="" disabled defaultValue>Фонд</option>
-                      <option value="1">Спеціальний</option>
-                      <option value="2">Загальний</option>
-                      <option value="3">Разом</option>
-                    </select>
-                  </div>
-                  <div className="select-wrapper">
-                    <select>
-                      <option value="" disabled defaultValue>Код</option>
-                      <option value="1">10000000</option>
-                      <option value="2">20000000</option>
-                      <option value="3">30000000</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-              <div className="button-send">
-                <button className="send">
-                  <div className="fa-img">
-                    <p><Link to="/">ПОШУК</Link></p>
-                  </div>              
-                </button>
-              </div>
-            </div>
+    let table =            
             <table className="table">
               <thead>
                 <tr className="tr">
@@ -243,8 +188,345 @@ export default class Income extends Component {
                 </tr>
               </tbody>
             </table>
+    let realizationDiagram =  <PieChart width={800} height={400} onMouseEnter={this.onPieEnter}>
+                <Pie
+                  data={data}
+                  cx={420}
+                  cy={200}
+                  startAngle={180}
+                  endAngle={0}
+                  innerRadius={60}
+                  outerRadius={80}
+                  fill="#8884d8"
+                  paddingAngle={5}
+                  dataKey="value"
+                >
+                  {
+                    data.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)
+                  }
+                </Pie>
+              </PieChart>
+    let structureDiagram = 
+              <PieChart width={800} height={400} onMouseEnter={this.onPieEnter}>
+                <Pie
+                  data={data}
+                  cx={420}
+                  cy={200}
+                  startAngle={180}
+                  endAngle={0}
+                  innerRadius={60}
+                  outerRadius={80}
+                  fill="#8884d8"
+                  paddingAngle={5}
+                  dataKey="value"
+                >
+                  {
+                    data.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)
+                  }
+                </Pie>
+              </PieChart>
+    if (this.state.structureFlag){
+      return
+        <div className="page-wrapper income__page">
+          <div className="layer-one">
+            <div className="layer-one-top-parallax">
+              <nav>
+                <ul className="topmenu">
+                  <li><Link to="/">ГОЛОВНА</Link></li>
+                  <li><Link to="/income" className="active">ДОХОДИ</Link>
+                    <ul className="submenu">
+                      <li><a href="">виконання бюджету</a></li>
+                      <li><a href="">структура бюджету</a></li>
+                    </ul>
+                  </li>
+                  <li><Link to="/expenditures">ВИДАТКИ</Link>
+                    <ul className="submenu">
+                      <li><a href="">виконання бюджету</a></li>
+                      <li><a href="">структура бюджету</a></li>
+                    </ul>
+                  </li>
+                  <li><a href="">ДИНАМІКА</a></li>
+                  <li><a href="">КЛАСТЕРИЗАЦІЯ</a></li>
+                </ul>
+              </nav>
+              <h3>Бюджет м. {city}</h3>
+              <div className="buttons-top">
+                <button className="send1" name="explanation" onClick={this.handleClick}>ВИКОНАННЯ БЮДЖЕТУ         
+                </button>
+                <button className="send1" name="structure" onClick={this.handleClick}>
+                    СТРУКТУРА БЮДЖЕТУ         
+                </button>
+              </div>
+              <div className="all">
+                <div className ="choose-periods">
+                  <div className="custom-select">
+                    <p>Рік:</p>
+                    <p>За період:</p>
+                    <p></p>
+                    <p>Фонд:</p>
+                    <p>Код:</p>
+                  </div>
+                  <div className="custom-select">
+                    <div className="select-wrapper">
+                      <select>
+                        <option value="" disabled defaultValue>Рік</option>
+                        <option value="1">2018</option>
+                        <option value="2">2019</option>
+                      </select>
+                    </div>
+                    <div className="select-wrapper">
+                      <select>
+                        <option value="" disabled defaultValue>Початок</option>
+                        <option value="1">Січень</option>
+                        <option value="2">Лютий</option>
+                        <option value="3">Березень</option>
+                      </select>
+                    </div>
+                    <div className="select-wrapper">
+                      <select>
+                        <option value="" disabled defaultValue>Кінець</option>
+                        <option value="1">Січень</option>
+                        <option value="2">Лютий</option>
+                        <option value="3">Березень</option>
+                      </select>
+                    </div>
+                    <div className="select-wrapper">
+                      <select>
+                        <option value="" disabled defaultValue>Фонд</option>
+                        <option value="1">Спеціальний</option>
+                        <option value="2">Загальний</option>
+                        <option value="3">Разом</option>
+                      </select>
+                    </div>
+                    <div className="select-wrapper">
+                      <select>
+                        <option value="" disabled defaultValue>Код</option>
+                        <option value="1">10000000</option>
+                        <option value="2">20000000</option>
+                        <option value="3">30000000</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div className="button-send">
+                  <button className="send">
+                    <div className="fa-img">
+                      <p><Link to="/">ПОШУК</Link></p>
+                    </div>              
+                  </button>
+                </div>
+              </div>
+              
+            </div>
+         </div>
+        </div>
+    }
+    else if (this.state.explanationFlag){
+      return <div className="page-wrapper income__page">
+      <div className="layer-one">
+          <div className="layer-one-top-parallax">
+            <nav>
+              <ul className="topmenu">
+                <li><Link to="/">ГОЛОВНА</Link></li>
+                <li><Link to="/income" className="active">ДОХОДИ</Link>
+                  <ul className="submenu">
+                    <li><a href="">виконання бюджету</a></li>
+                    <li><a href="">структура бюджету</a></li>
+                  </ul>
+                </li>
+                <li><Link to="/expenditures">ВИДАТКИ</Link>
+                  <ul className="submenu">
+                    <li><a href="">виконання бюджету</a></li>
+                    <li><a href="">структура бюджету</a></li>
+                  </ul>
+                </li>
+                <li><a href="">ДИНАМІКА</a></li>
+                <li><a href="">КЛАСТЕРИЗАЦІЯ</a></li>
+              </ul>
+            </nav>
+            <h3>Бюджет м. {city}</h3>
+            <div className="buttons-top">
+              <button className="send1" name="explanation" onClick={this.handleClick}>ВИКОНАННЯ БЮДЖЕТУ         
+              </button>
+              <button className="send1" name="structure" onClick={this.handleClick}>
+                  СТРУКТУРА БЮДЖЕТУ         
+              </button>
+            </div>
+            <div className="all">
+              <div className ="choose-periods">
+                <div className="custom-select">
+                  <p>Рік:</p>
+                  <p>За період:</p>
+                  <p></p>
+                  <p>Фонд:</p>
+                  <p>Код:</p>
+                </div>
+                <div className="custom-select">
+                  <div className="select-wrapper">
+                    <select>
+                      <option value="" disabled defaultValue>Рік</option>
+                      <option value="1">2018</option>
+                      <option value="2">2019</option>
+                    </select>
+                  </div>
+                  <div className="select-wrapper">
+                    <select>
+                      <option value="" disabled defaultValue>Початок</option>
+                      <option value="1">Січень</option>
+                      <option value="2">Лютий</option>
+                      <option value="3">Березень</option>
+                    </select>
+                  </div>
+                  <div className="select-wrapper">
+                    <select>
+                      <option value="" disabled defaultValue>Кінець</option>
+                      <option value="1">Січень</option>
+                      <option value="2">Лютий</option>
+                      <option value="3">Березень</option>
+                    </select>
+                  </div>
+                  <div className="select-wrapper">
+                    <select>
+                      <option value="" disabled defaultValue>Фонд</option>
+                      <option value="1">Спеціальний</option>
+                      <option value="2">Загальний</option>
+                      <option value="3">Разом</option>
+                    </select>
+                  </div>
+                  <div className="select-wrapper">
+                    <select>
+                      <option value="" disabled defaultValue>Код</option>
+                      <option value="1">10000000</option>
+                      <option value="2">20000000</option>
+                      <option value="3">30000000</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div className="button-send">
+                <button className="send">
+                  <div className="fa-img">
+                    <p><Link to="/">ПОШУК</Link></p>
+                  </div>              
+                </button>
+              </div>
+            </div>
+            <PieChart width={800} height={400} onMouseEnter={this.onPieEnter}>
+                <Pie
+                  data={data}
+                  cx={420}
+                  cy={200}
+                  startAngle={180}
+                  endAngle={0}
+                  innerRadius={60}
+                  outerRadius={80}
+                  fill="#8884d8"
+                  paddingAngle={5}
+                  dataKey="value"
+                >
+                  {
+                    data.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)
+                  }
+                </Pie>
+              </PieChart>
           </div>
       </div>
     </div>
+    } 
+    else {
+      return <div className="page-wrapper income__page">
+      <div className="layer-one">
+          <div className="layer-one-top-parallax">
+            <nav>
+              <ul className="topmenu">
+                <li><Link to="/">ГОЛОВНА</Link></li>
+                <li><Link to="/income" className="active">ДОХОДИ</Link>
+                  <ul className="submenu">
+                    <li><a href="">виконання бюджету</a></li>
+                    <li><a href="">структура бюджету</a></li>
+                  </ul>
+                </li>
+                <li><Link to="/expenditures">ВИДАТКИ</Link>
+                  <ul className="submenu">
+                    <li><a href="">виконання бюджету</a></li>
+                    <li><a href="">структура бюджету</a></li>
+                  </ul>
+                </li>
+                <li><a href="">ДИНАМІКА</a></li>
+                <li><a href="">КЛАСТЕРИЗАЦІЯ</a></li>
+              </ul>
+            </nav>
+            <h3>Бюджет м. {city}</h3>
+            <div className="buttons-top">
+              <button className="send1" name="explanation" onClick={this.handleClick}>ВИКОНАННЯ БЮДЖЕТУ         
+              </button>
+              <button className="send1" name="structure" onClick={this.handleClick}>
+                  СТРУКТУРА БЮДЖЕТУ         
+              </button>
+            </div>
+            <div className="all">
+              <div className ="choose-periods">
+                <div className="custom-select">
+                  <p>Рік:</p>
+                  <p>За період:</p>
+                  <p></p>
+                  <p>Фонд:</p>
+                  <p>Код:</p>
+                </div>
+                <div className="custom-select">
+                  <div className="select-wrapper">
+                    <select>
+                      <option value="" disabled defaultValue>Рік</option>
+                      <option value="1">2018</option>
+                      <option value="2">2019</option>
+                    </select>
+                  </div>
+                  <div className="select-wrapper">
+                    <select>
+                      <option value="" disabled defaultValue>Початок</option>
+                      <option value="1">Січень</option>
+                      <option value="2">Лютий</option>
+                      <option value="3">Березень</option>
+                    </select>
+                  </div>
+                  <div className="select-wrapper">
+                    <select>
+                      <option value="" disabled defaultValue>Кінець</option>
+                      <option value="1">Січень</option>
+                      <option value="2">Лютий</option>
+                      <option value="3">Березень</option>
+                    </select>
+                  </div>
+                  <div className="select-wrapper">
+                    <select>
+                      <option value="" disabled defaultValue>Фонд</option>
+                      <option value="1">Спеціальний</option>
+                      <option value="2">Загальний</option>
+                      <option value="3">Разом</option>
+                    </select>
+                  </div>
+                  <div className="select-wrapper">
+                    <select>
+                      <option value="" disabled defaultValue>Код</option>
+                      <option value="1">10000000</option>
+                      <option value="2">20000000</option>
+                      <option value="3">30000000</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div className="button-send">
+                <button className="send">
+                  <div className="fa-img">
+                    <p><Link to="/">ПОШУК</Link></p>
+                  </div>              
+                </button>
+              </div>
+            </div>
+            {table}
+          </div>
+      </div>
+    </div>
+    }
   }
 }

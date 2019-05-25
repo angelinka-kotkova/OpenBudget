@@ -240,6 +240,7 @@ export default class UkraineMap extends Component{
       this.props.onChange(el);
   }
 	render(){
+     let {currentRegion} = this.props;
      const path = this.state.path.map((item,index) => <path 
         className={item.dataValue === this.state.selectedRegion ? "region-map__region region-map__item region-map__item--active" : "region-map__region region-map__item"}
         key={index} data-value={item.dataValue} 
@@ -255,9 +256,9 @@ export default class UkraineMap extends Component{
     const {svgref} = this.props;
 		return(
 			<div ref={svgref} id="svgMapContainer" className="Ukraine_map">
-        <svg width="100%" viewBox="0 0 754 473" fill="none" xmlns="http://www.w3.org/2000/svg" className="background region-map__map" data-v-72af5b48="">
-        {path}
-        </svg>
+                <svg width="100%" viewBox="0 0 754 473" fill="none" xmlns="http://www.w3.org/2000/svg" className="background region-map__map" data-v-72af5b48="">
+                {path}
+                </svg>
 			</div>
 		);
 	}

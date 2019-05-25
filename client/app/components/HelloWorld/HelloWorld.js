@@ -23,9 +23,8 @@ export default class HelloWorld extends Component {
       currentRegion : 'Київ',
       loading: true,
       currentCity: 'Київ',
-      cityKey: '09304502000',
+      cityKey: '26400100000',
     };
-    this.routeChange = this.routeChange.bind(this);
     this.regionCity = React.createRef();
     this.region = React.createRef();
     this.svgMap = React.createRef();
@@ -35,10 +34,6 @@ export default class HelloWorld extends Component {
     this.chooseCities = this.chooseCities.bind(this);
     this.chooseRegion = this.chooseRegion.bind(this);
   };
-  routeChange() {
-    let path = `newPath`;
-    this.props.history.push(path);
-  }
   componentDidMount() {
     preloaderCall().then(() => {
       this.setState({ loading: false }); 
@@ -52,12 +47,21 @@ export default class HelloWorld extends Component {
   changeCity(){
     let citySelect = this.regionCity.current;
     let cityOption = citySelect.options[citySelect.selectedIndex].value;
-    this.setState({currentCity: cityOption});
+    this.setState({
+      currentCity: cityOption,
+      cityKey: citySelect.options[citySelect.selectedIndex].dataset.key
+    });
+
   };
   changeRegionFromMap(value){
-    console.log(value);
     this.setState({currentRegion: value});
     let regionSelect = this.region.current;
+    let citySelect = this.regionCity.current;
+    let cityOption = citySelect.options[citySelect.selectedIndex].value;
+    this.setState({
+      currentCity: cityOption,
+      cityKey: citySelect.options[citySelect.selectedIndex].dataset.key
+    });
     regionSelect.options[regionSelect.selectedIndex].value = regionSelect.option
     for (let opt, j = 0; opt = regionSelect.options[j]; j++) {
       if (opt.value == value) {
@@ -99,189 +103,190 @@ export default class HelloWorld extends Component {
   }
   chooseCities(){
     let Vinnytska = [ 
-        <option value = 'Каришків'>Каришків</option>,
-        <option value='Каришків'>Каришків</option>,
-        <option value = 'Комарівці'>Комарівці</option>,
-        <option value = 'Кузьминці'>Кузьминці</option>,
-        <option value = 'Лісове'>Лісове</option>,
-        <option value = 'Лука-Барська'>Лука-Барська</option>,
+        <option data-key="02301510000" value='Іванівці'>Іванівці</option>,
+        <option data-key="02301511000" value='Каришків'>Каришків</option>,
+        <option data-key="02301512000" value ='Комарівці'>Комарівці</option>,
+        <option data-key="02301513000" value = 'Кузьминці'>Кузьминці</option>,
+        <option data-key="02301514000" value = 'Лісове'>Лісове</option>,
+        <option data-key="02301515000" value = 'Лука-Барська'>Лука-Барська</option>,
     ];
     let Volynska = [ 
-      <option value = 'Баківці'>Баківці</option>,
-      <option value='Білосток'>Білосток</option>,
-      <option value = 'Буяни'>Буяни</option>,
-      <option value = 'Веселе'>Веселе</option>,
-      <option value = 'Воютин'>Воютин</option>,
-      <option value = 'Луцький район'>Луцький район</option>,
+      <option data-key="03308502000" value = 'Баківці'>Баківці</option>,
+      <option data-key="03308503000" value='Білосток'>Білосток</option>,
+      <option data-key="03308505000" value = 'Буяни'>Буяни</option>,
+      <option data-key="03308505000" value = 'Веселе'>Веселе</option>,
+      <option data-key="03308507000" value = 'Воютин'>Воютин</option>,
+      <option data-key="03308508000" value = 'Луцький район'>Луцький район</option>,
     ];
     let Dnypropetrovska = [ 
-      <option value = 'Верхньодніпровськ'>Верхньодніпровськ</option>,
-      <option value='Лошкарівка'>Лошкарівка</option>,
-      <option value = 'Межиріч'>Межиріч</option>,
-      <option value = 'Межова'>Межова</option>,
-      <option value = 'Першотравневе'>Першотравневе</option>,
-      <option value = 'Троїцьке'>Троїцьке</option>,
+      <option data-key="04536000000-"  value = 'Верхньодніпровськ'>Верхньодніпровськ</option>,
+      <option data-key="04538000000"  value='Лошкарівка'>Лошкарівка</option>,
+      <option  data-key="04541000000" value = 'Межиріч'>Межиріч</option>,
+      <option  data-key="04537000000" value = 'Межова'>Межова</option>,
+      <option  data-key="04539000000" value = 'Першотравневе'>Першотравневе</option>,
+      <option  data-key="04542000000" value = 'Троїцьке'>Троїцьке</option>,
     ];
     let Donetska = [ 
-      <option value = 'Донецьк'>Донецьк</option>,
-      <option value='Зайцеве'>Зайцеве</option>,
-      <option value = 'Калинівка'>Калинівка</option>,
-      <option value = 'Часів Яр'>ЧасівЯр</option>,
-      <option value = 'Калинове'>Калинове</option>,
-      <option value = 'Світлодарська'>Світлодарська</option>,
+      <option  data-key="05201100000" value = 'Донецьк'>Донецьк</option>,
+      <option  data-key="05302507000" value='Зайцеве'>Зайцеве</option>,
+      <option  data-key="05302509000" value = 'Калинівка'>Калинівка</option>,
+      <option data-key="05302510000"  value = 'Калинове'>Калинове</option>,
+      <option data-key="05302303000"  value = 'Світлодарська'>Світлодарська</option>,
+      <option data-key="05302305000"  value = 'Часів Яр'>Часів Яр</option>,
+
     ];
     let Zhytomyrska = [
-      <option value = 'Камені'>Камені</option>,
-      <option value='Лебединці'>Лебединці</option>,
-      <option value = 'Любимівка'>Любимівка</option>,
-      <option value = 'Міньковці'>Міньковці</option>,
-      <option value = 'Мостове'>Мостове</option>,
-      <option value = 'Нехворощ'>Нехворощ</option>,
+      <option  data-key="06301513000" value = 'Камені'>Камені</option>,
+      <option  data-key="06301515000" value='Лебединці'>Лебединці</option>,
+      <option  data-key="06301516000" value = 'Любимівка'>Любимівка</option>,
+      <option  data-key="06301519000" value = 'Міньковці'>Міньковці</option>,
+      <option  data-key="06301520000" value = 'Мостове'>Мостове</option>,
+      <option  data-key="06301521000" value = 'Нехворощ'>Нехворощ</option>,
     ];
     let Zakarpatska = [ 
-      <option value = 'Вишково'>Вишково</option>,
-      <option value='Холмок'>Холмок</option>,
-      <option value = 'Худльово'>Худльово</option>,
-      <option value = 'Хутський район'>Хутський район</option>,
-      <option value = 'Часлівці'>Часлівці</option>,
-      <option value = 'Червоне'>Червоне</option>,
+      <option  data-key="07313401000" value = 'Вишково'>Вишково</option>,
+      <option  data-key="07312528000" value='Холмок'>Холмок</option>,
+      <option  data-key="07312529000" value = 'Худльово'>Худльово</option>,
+      <option  data-key="07313200000" value = 'Хутський район'>Хутський район</option>,
+      <option  data-key="07312530000" value = 'Часлівці'>Часлівці</option>,
+      <option  data-key="07312531000" value = 'Червоне'>Червоне</option>,
     ];
     let Zaporyzka = [ 
-      <option value = 'Благовіщенка'>Благовіщенка</option>,
-      <option value='Кирилівка'>Кирилівка</option>,
-      <option value = 'Новобогданівка'>Новобогданівка</option>,
-      <option value = 'Плодородне'>Плодородне</option>,
-      <option value = 'Приазовське'>Приазовське</option>,
-      <option value = 'Якимівка'>Якимівка</option>,
+      <option  data-key="08535000000" value = 'Благовіщенка'>Благовіщенка</option>,
+      <option  data-key="08532000000" value='Кирилівка'>Кирилівка</option>,
+      <option  data-key="08534000000" value = 'Новобогданівка'>Новобогданівка</option>,
+      <option  data-key="08530000000" value = 'Плодородне'>Плодородне</option>,
+      <option  data-key="08531000000" value = 'Приазовське'>Приазовське</option>,
+      <option  data-key="08533000000" value = 'Якимівка'>Якимівка</option>,
     ];
     let IvanoFrankivska = [ 
-      <option value = 'Вербівці'>Вербівці</option>,
-      <option value='Виноград'>Виноград</option>,
-      <option value = 'Вікно'>Вікно</option>,
-      <option value = 'Вільхівці'>Вільхівці</option>,
-      <option value = 'Чернелиця'>Чернелиця</option>,
-      <option value = 'Городенки'>Городенки</option>,
+      <option  data-key="09304501000" value = 'Вербівці'>Вербівці</option>,
+      <option  data-key="09304502000" value='Виноград'>Виноград</option>,
+      <option  data-key="09304503000" value = 'Вікно'>Вікно</option>,
+      <option data-key="09304504000"  value = 'Вільхівці'>Вільхівці</option>,
+      <option data-key="09304301000"  value = 'Чернелиця'>Чернелиця</option>,
+      <option  data-key="09304401000" value = 'Городенки'>Городенки</option>,
     ];
-    let Kyiv = [<option value = 'Київ'>Київ</option>,];
+    let Kyiv = [<option data-key="26400100000" value = 'Київ'>Київ</option>,];
     let Kyivska = [ 
-      <option value = 'Жоравка'>Жоравка</option>,
-      <option value='Засупоївка'>Засупоївка</option>,
-      <option value = 'Капустинці'>Капустинці</option>,
-      <option value = 'Кулябівка'>Кулябівка</option>,
-      <option value = 'Лемешівка'>Першотравневе</option>,
-      <option value = 'Лозовий Яр'>Лозовий Яр</option>,
+      <option  data-key="10325504000" value = 'Жоравка'>Жоравка</option>,
+      <option  data-key="10325505000" value='Засупоївка'>Засупоївка</option>,
+      <option  data-key="10325506000" value = 'Капустинці'>Капустинці</option>,
+      <option  data-key="10325507000" value = 'Кулябівка'>Кулябівка</option>,
+      <option  data-key="10325507000" value = 'Лемешівка'>Лемешівка</option>,
+      <option  data-key="10325509000" value = 'Лозовий Яр'>Лозовий Яр</option>,
     ];
     let Kirovogradska = [ 
-      <option value = 'Деріївка'>Деріївка</option>,
-      <option value='Зибкове'>Зибкове</option>,
-      <option value = 'Камбурліївка'>Камбурліївка</option>,
-      <option value = 'Куцеволівка'>Куцеволівка</option>,
-      <option value = "Мар'ївка">Мар'ївка</option>,
-      <option value = 'Млинок'>Млинок</option>,
+      <option  data-key="11317503000" value = 'Деріївка'>Деріївка</option>,
+      <option  data-key="11317504000" value='Зибкове'>Зибкове</option>,
+      <option  data-key="11317505000" value = 'Камбурліївка'>Камбурліївка</option>,
+      <option  data-key="11317506000" value = 'Куцеволівка'>Куцеволівка</option>,
+      <option  data-key="11317507000" value = "Мар'ївка">Мар'ївка</option>,
+      <option  data-key="11317508000" value = 'Млинок'>Млинок</option>,
     ];
     let Lvivska = [ 
-      <option value = 'Бишів'>Бишів</option>,
-      <option value='Радехів'>Радехів</option>,
-      <option value = 'Скнилів'>Скнилів</option>,
-      <option value = 'Сокільники'>Сокільники</option>,
-      <option value = 'Ставчани'>Ставчани</option>,
-      <option value = 'Старе Село'>Старе Село</option>,
+      <option  data-key="15324505000" value = 'Бишів'>Бишів</option>,
+      <option  data-key="13313301000" value='Радехів'>Радехів</option>,
+      <option  data-key="13312529000" value = 'Скнилів'>Скнилів</option>,
+      <option  data-key="13312530000" value = 'Сокільники'>Сокільники</option>,
+      <option  data-key="13312534000" value = 'Ставчани'>Ставчани</option>,
+      <option  data-key="13312535000" value = 'Старе Село'>Старе Село</option>,
     ];
     let Odeska = [ 
-      <option value = 'Борисівка'>Борисівка</option>,
-      <option value='Вишневе'>Вишневе</option>,
-      <option value = 'Глибоке'>Глибоке</option>,
-      <option value = 'Дельжирел'>Дельжирел</option>,
-      <option value = 'Дивізія'>Дивізія</option>,
-      <option value = 'Жовтий Яр'>Жовтий Яр</option>,
+      <option  data-key="15324505000" value = 'Борисівка'>Борисівка</option>,
+      <option  data-key="15324506000" value='Вишневе'>Вишневе</option>,
+      <option  data-key="15324507000" value = 'Глибоке'>Глибоке</option>,
+      <option  data-key="15324509000" value = 'Дельжирел'>Дельжирел</option>,
+      <option  data-key="15324508000" value = 'Дивізія'>Дивізія</option>,
+      <option  data-key="15324510000" value = 'Жовтий Яр'>Жовтий Яр</option>,
     ];
     let Mykolaivska = [
-      <option value = 'Березанка'>Березанка</option>,
-      <option value='Володимирівка'>Володимирівка</option>,
-      <option value = 'Казанка'>Казанка</option>,
-      <option value = 'Куцуруб'>Куцуруб</option>,
-      <option value = 'Прибужжя'>Прибужжя</option>,
-      <option value = 'Суворе'>Суворе</option>,
+      <option  data-key="14522000000" value = 'Березанка'>Березанка</option>,
+      <option  data-key="14524000000" value='Володимирівка'>Володимирівка</option>,
+      <option  data-key="14525000000" value = 'Казанка'>Казанка</option>,
+      <option  data-key="14501000000" value = 'Куцуруб'>Куцуруб</option>,
+      <option  data-key="14523000000" value = 'Прибужжя'>Прибужжя</option>,
+      <option  data-key="14319519000" value = 'Суворе'>Суворе</option>,
     ];
     let Poltavska = [ 
-      <option value = 'Білоцерківка'>Білоцерківка</option>,
-      <option value='Бутенки'>Бутенки</option>,
-      <option value = 'Гребінка'>Гребінка</option>,
-      <option value = 'Ланна'>Ланна</option>,
-      <option value = 'Рокити'>Рокити</option>,
-      <option value = 'Сидоряче'>Сидоряче</option>,
+      <option  data-key="16501000000" value = 'Білоцерківка'>Білоцерківка</option>,
+      <option  data-key="16523000000" value='Бутенки'>Бутенки</option>,
+      <option  data-key="16521000000" value = 'Гребінка'>Гребінка</option>,
+      <option  data-key="16522000000" value = 'Ланна'>Ланна</option>,
+      <option  data-key="16520000000" value = 'Рокити'>Рокити</option>,
+      <option  data-key="16326509000" value = 'Сидоряче'>Сидоряче</option>,
     ];
     let Rivnenska = [ 
-      <option value = 'Бережки'>Бережки</option>,
-      <option value='Бережниця'>Бережниця</option>,
-      <option value = 'Берестя'>Берестя</option>,
-      <option value = 'Великі Озера'>Великі Озера</option>,
-      <option value = 'Велюнь'>Велюнь</option>,
-      <option value = 'Дубровиця'>Дубровиця</option>,
+      <option  data-key="17306501000" value = 'Бережки'>Бережки</option>,
+      <option  data-key="17306502000" value='Бережниця'>Бережниця</option>,
+      <option  data-key="17306503000" value = 'Берестя'>Берестя</option>,
+      <option  data-key="17306504000" value = 'Великі Озера'>Великі Озера</option>,
+      <option  data-key="17306505000" value = 'Велюнь'>Велюнь</option>,
+      <option  data-key="17306301000" value = 'Дубровиця'>Дубровиця</option>,
     ];
     let Symska = [ 
-      <option value = 'Байрак'>Байрак</option>,
-      <option value='Липова Долина'>Липова Долина</option>,
-      <option value = 'Пристайлове'>Пристайлове</option>,
-      <option value = 'Рябушки'>Рябушки</option>,
-      <option value = 'Червлене'>Червлене</option>,
-      <option value = 'Штепівка'>Штепівка</option>,
+      <option  data-key="18309501000" value = 'Байрак'>Байрак</option>,
+      <option  data-key="18309401000" value='Липова Долина'>Липова Долина</option>,
+      <option  data-key="18308520000" value = 'Пристайлове'>Пристайлове</option>,
+      <option data-key="18308521000"  value = 'Рябушки'>Рябушки</option>,
+      <option  data-key="18308522000" value = 'Червлене'>Червлене</option>,
+      <option  data-key="18308523000" value = 'Штепівка'>Штепівка</option>,
     ];
     let Ternopylska = [ 
-      <option value = 'Доброводи'>Доброводи</option>,
-      <option value='Добромірка'>Добромірка</option>,
-      <option value = 'Залісці'>Залісці</option>,
-      <option value = 'Залужжя'>Залужжя</option>,
-      <option value = 'Зарубинці'>Зарубинці</option>,
-      <option value = 'Заруддя'>Заруддя</option>,
+      <option  data-key="19306509000" value = 'Доброводи'>Доброводи</option>,
+      <option  data-key="19306510000" value='Добромірка'>Добромірка</option>,
+      <option  data-key="19306511000" value = 'Залісці'>Залісці</option>,
+      <option  data-key="19306512000" value = 'Залужжя'>Залужжя</option>,
+      <option  data-key="19306513000" value = 'Зарубинці'>Зарубинці</option>,
+      <option  data-key="19306514000" value = 'Заруддя'>Заруддя</option>,
     ];
     let Kharkivska = [ 
-      <option value = 'Бірки'>Бірки</option>,
-      <option value='Богданівське'>Богданівське</option>,
-      <option value = 'Велика Гомільша'>Велика Гомільша</option>,
-      <option value = 'Борова'>Борова</option>,
-      <option value = 'Вільшани'>Вільшани</option>,
-      <option value = 'Троїцьке'>Троїцьке</option>,
+      <option  data-key="20312501000" value = 'Бірки'>Бірки</option>,
+      <option  data-key="20309502000" value='Богданівське'>Богданівське</option>,
+      <option  data-key="20312503000" value = 'Велика Гомільша'>Велика Гомільша</option>,
+      <option  data-key="20312502000" value = 'Борова'>Борова</option>,
+      <option data-key="20309501000"  value = 'Вільшани'>Вільшани</option>,
+      <option  data-key="20312402000" value = 'Троїцьке'>Троїцьке</option>,
     ];
     let Khersonska = [ 
-      <option value = 'Анатоліївка'>Анатоліївка</option>,
-      <option value='Братське'>Братське</option>,
-      <option value = 'Нижні Сірогози'>Нижні Сірогози</option>,
-      <option value = 'Семенівка'>Семенівка</option>,
-      <option value = 'Федорівка'>Федорівка</option>,
-      <option value = 'Слобожанське'>Слобожанське</option>,
+      <option data-key="21313501000"  value = 'Анатоліївка'>Анатоліївка</option>,
+      <option  data-key="21313502000" value='Братське'>Братське</option>,
+      <option  data-key="21313401000" value = 'Нижні Сірогози'>Нижні Сірогози</option>,
+      <option  data-key="21312514000" value = 'Семенівка'>Семенівка</option>,
+      <option  data-key="21312516000" value = 'Федорівка'>Федорівка</option>,
+      <option  data-key="21312519000" value = 'Слобожанське'>Слобожанське</option>,
     ];
     let Khmelnytska = [ 
-      <option value = 'Понінка'>Понінка</option>,
-      <option value='Розсоша'>Розсоша</option>,
-      <option value = 'Сатанів'>Сатанів</option>,
-      <option value = 'Стара Синява'>Стара Синява</option>,
-      <option value = 'Чемерівці'>Чемерівці</option>,
-      <option value = 'Чорний Острів'>Чорний Острів</option>,
+      <option  data-key="22518000000" value = 'Понінка'>Понінка</option>,
+      <option  data-key="22519000000" value='Розсоша'>Розсоша</option>,
+      <option  data-key="22520000000" value = 'Сатанів'>Сатанів</option>,
+      <option  data-key="22521000000" value = 'Стара Синява'>Стара Синява</option>,
+      <option  data-key="22523000000" value = 'Чемерівці'>Чемерівці</option>,
+      <option  data-key="22522000000" value = 'Чорний Острів'>Чорний Острів</option>,
     ];
     let Cherkaska = [ 
-      <option value = 'Бойківщина'>Бойківщина</option>,
-      <option value='Великий Хутір'>Великий Хутір</option>,
-      <option value = 'Демки'>Демки</option>,
-      <option value = 'Золотоношка'>Золотоношка</option>,
-      <option value = 'Жорнокльови'>Жорнокльови</option>,
-      <option value = 'Кантакузівка'>Кантакузівка</option>,
+      <option  data-key="23302505000" value = 'Бойківщина'>Бойківщина</option>,
+      <option  data-key="23302506000" value='Великий Хутір'>Великий Хутір</option>,
+      <option  data-key="23302508000" value = 'Демки'>Демки</option>,
+      <option  data-key="23302510000" value = 'Золотоношка'>Золотоношка</option>,
+      <option  data-key="23302511000" value = 'Жорнокльови'>Жорнокльови</option>,
+      <option  data-key="23302512000" value = 'Кантакузівка'>Кантакузівка</option>,
     ];
     let Chernyvetska = [ 
-      <option value = 'Байраки'>Байраки</option>,
-      <option value='Буківка'>Буківка</option>,
-      <option value = 'Велика Буда'>Велика Буда</option>,
-      <option value = 'Великий Кучурій'>Великий Кучурій</option>,
-      <option value = 'Волока'>Волока</option>,
-      <option value = 'Герца'>Герца</option>,
+      <option  data-key="24302501000" value = 'Байраки'>Байраки</option>,
+      <option  data-key="24302502000" value='Буківка'>Буківка</option>,
+      <option  data-key="24302503000" value = 'Велика Буда'>Велика Буда</option>,
+      <option  data-key="24502000000" value = 'Великий Кучурій'>Великий Кучурій</option>,
+      <option  data-key="24503000000" value = 'Волока'>Волока</option>,
+      <option  data-key="24302301000" value = 'Герца'>Герца</option>,
     ];
     let Chernygivska = [ 
-      <option value = 'Батурин'>Батурин</option>,
-      <option value='Кіпті'>Кіпті</option>,
-      <option value = 'Корюківка'>Корюківка</option>,
-      <option value = 'Макіївка'>Макіївка</option>,
-      <option value = 'Носівка'>Носівка</option>,
-      <option value = 'Парафіївка'>Парафіївка</option>,
+      <option  data-key="25506000000" value = 'Батурин'>Батурин</option>,
+      <option  data-key="25503000000" value='Кіпті'>Кіпті</option>,
+      <option  data-key="25507000000" value = 'Корюківка'>Корюківка</option>,
+      <option  data-key="25504000000" value = 'Макіївка'>Макіївка</option>,
+      <option  data-key="25508000000" value = 'Носівка'>Носівка</option>,
+      <option  data-key="25505000000" value = 'Парафіївка'>Парафіївка</option>,
     ];
     switch(this.state.currentRegion){
       case 'Вінницька':
@@ -376,13 +381,11 @@ export default class HelloWorld extends Component {
                                 <div className="select-arrow"></div>
                              </div>
                             <div className="select-wrapper">
-                                  <select ref={this.region} onChange = {this.changeRegion} placeholder="Виберіть бюджет">
+                                  <select ref={this.region} currentRegion= {this.state.currentRegion} onChange = {this.changeRegion} placeholder="Виберіть бюджет">
                                     {this.chooseRegion()}
                                   </select>
                                   <div className="select-arrow"></div>
-                             </div>
-                             
-                             
+                             </div> 
                           </div>
                        </form>
                     </article>
