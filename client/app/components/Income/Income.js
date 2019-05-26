@@ -16,12 +16,7 @@ const data = [
 ];
 
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
-const App = () => (
-  <div>
-    {/* Logo is an actual React component */}
-    <Logo />
-  </div>
-); 
+
 
 
 
@@ -56,6 +51,7 @@ export default class Income extends Component {
       .catch(error => console.log(error));
       }
   }
+  
   handleClick(event) {
     console.log(this.state.data);
     if (event.target.name == "explanation"){
@@ -521,7 +517,6 @@ export default class Income extends Component {
               </div>
             </div>
             {table}
-            [this.state.data]
           </div>
       </div>
     </div>

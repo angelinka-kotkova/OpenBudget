@@ -33,11 +33,15 @@ export default class MainPage extends Component {
     this.changeCity = this.changeCity.bind(this);
     this.chooseCities = this.chooseCities.bind(this);
     this.chooseRegion = this.chooseRegion.bind(this);
+    this.showState = this.showState.bind(this);
   };
   componentDidMount() {
     preloaderCall().then(() => {
       this.setState({ loading: false }); 
     });
+  }
+  showState(){
+    console.log(this.state);
   }
   changeRegion(){
     let regionSelect = this.region.current;
@@ -364,6 +368,7 @@ export default class MainPage extends Component {
                              <div className="fa-img">
                                 <p>
                                    <Link
+                                      onClick={this.showState}
                                       to={{
                                         pathname: '/income',
                                         state: {
