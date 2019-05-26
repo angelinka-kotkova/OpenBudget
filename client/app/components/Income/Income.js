@@ -29,27 +29,50 @@ export default class Income extends Component {
       incomeDocument: '',
       city: "Киев",
       cityKey: '26400100000',
-      data: {
-        nothing: "asdasd"
-      },
+      dataObj: "No data",
+      tableData: "No data"
     };
+    this.yearSelect = React.createRef();
+    this.lastMonth = React.createRef();
+    this.incomeCode = React.createRef();
     this.handleClick = this.handleClick.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
   }
   componentDidMount () {
     if(this.props.location){
       this.setState((state) => {
-        city: this.props.location.city
-        cityKey: this.props.location.cityKey
+        return{
+          city: this.props.location.state.city,
+          cityKey: this.props.location.state.cityKey
+        }
       })
-      fetch('api/incomes/' + this.state.cityKey)
+      fetch('api/incomes/' + this.props.location.state.cityKey)
       .then(response => response.json())
       .then(data => {
-        this.setState({
-          data: data,
+        let incomesArr = data[0].incomes;
+        let dataArr = incomesArr.filter(function(item){
+          if(item.year=="2018" && item.month == "1"){
+            return item
+          }
+        })
+        dataArr = dataArr[0].budgetData.filter(function(item){
+          let incomeCode = item.incomeCode;
+          if(incomeCode[0] == "1"){
+            return item;
+          }
+        })
+
+        this.setState((state)=> {
+          return {
+            dataObj: data,
+            tableData: dataArr
+          }
         })
       })
       .catch(error => console.log(error));
       }
+      
+
   }
   
   handleClick(event) {
@@ -74,7 +97,39 @@ export default class Income extends Component {
       });
     }
   }
+  handleSearch(event){
+    let incomesArr = this.state.dataObj[0].incomes;
+    let yearSelect = this.yearSelect.current,
+        lastMonth = this.lastMonth.current,
+        incomeCode = this.incomeCode.current;
+    console.log("YEAR", yearSelect.value)
+    console.log("MONTH", lastMonth.options[lastMonth.selectedIndex].value)
+    let dataArr = incomesArr.filter(function(item){
+      if(item.year==yearSelect.value && item.month == lastMonth.options[lastMonth.selectedIndex].value){
+        return item
+      }
+    })
+    dataArr = dataArr[0].budgetData.filter(function(item){
+      let incomeCodeVar = item.incomeCode;
+      if(incomeCodeVar[0] == incomeCode.value){
+        return item;
+      }
+    })
+    this.setState((state)=> {
+      return {
+        tableData: dataArr
+      }
+    })
+  }
   render(){
+    const tableRow = this.state.tableData != "No data" ? this.state.tableData.map((item,index) => 
+      <tr key={index}>
+        <td scope="row">{item.incomeCode}</td>
+        <td scope="row">{item.incomeCodeName}</td>
+        <td scope="row">{item.yearBudgetPlan}</td>
+        <td scope="row">{item.totalDone}</td>
+        <td scope="row">{item.percentDone}</td>
+      </tr>) : <tr>NO DATA</tr>
     let table =            
             <table className="table">
               <thead>
@@ -87,97 +142,7 @@ export default class Income extends Component {
                 </tr>
               </thead>
               <tbody className="tbody">
-                <tr>
-                  <td scope="row">10000000</td>
-                  <td>Податкові надходження</td>
-                  <td>40 430 748 000.00</td>
-                  <td>6 473 583 004.16</td>
-                  <td>16.01</td>
-                </tr>
-                <tr>
-                  <td scope="row">10000000</td>
-                  <td>Податкові надходження</td>
-                  <td>40 430 748 000.00</td>
-                  <td>6 473 583 004.16</td>
-                  <td>16.01</td>
-                </tr>
-                <tr>
-                  <td scope="row">10000000</td>
-                  <td>Податкові надходження</td>
-                  <td>40 430 748 000.00</td>
-                  <td>6 473 583 004.16</td>
-                  <td>16.01</td>
-                </tr>
-                <tr>
-                  <td scope="row">10000000</td>
-                  <td>Податкові надходження</td>
-                  <td>40 430 748 000.00</td>
-                  <td>6 473 583 004.16</td>
-                  <td>16.01</td>
-                </tr>
-                <tr>
-                  <td scope="row">10000000</td>
-                  <td>Податкові надходження</td>
-                  <td>40 430 748 000.00</td>
-                  <td>6 473 583 004.16</td>
-                  <td>16.01</td>
-                </tr>
-                <tr>
-                  <td scope="row">10000000</td>
-                  <td>Податкові надходження</td>
-                  <td>40 430 748 000.00</td>
-                  <td>6 473 583 004.16</td>
-                  <td>16.01</td>
-                </tr>
-                <tr>
-                  <td scope="row">10000000</td>
-                  <td>Податкові надходження</td>
-                  <td>40 430 748 000.00</td>
-                  <td>6 473 583 004.16</td>
-                  <td>16.01</td>
-                </tr>
-                <tr>
-                  <td scope="row">10000000</td>
-                  <td>Податкові надходження</td>
-                  <td>40 430 748 000.00</td>
-                  <td>6 473 583 004.16</td>
-                  <td>16.01</td>
-                </tr>
-                <tr>
-                  <td scope="row">10000000</td>
-                  <td>Податкові надходження</td>
-                  <td>40 430 748 000.00</td>
-                  <td>6 473 583 004.16</td>
-                  <td>16.01</td>
-                </tr>
-                <tr>
-                  <td scope="row">10000000</td>
-                  <td>Податкові надходження</td>
-                  <td>40 430 748 000.00</td>
-                  <td>6 473 583 004.16</td>
-                  <td>16.01</td>
-                </tr>
-                <tr>
-                  <td scope="row">10000000</td>
-                  <td>Податкові надходження</td>
-                  <td>40 430 748 000.00</td>
-                  <td>6 473 583 004.16</td>
-                  <td>16.01</td>
-                </tr>
-                <tr>
-                  <td scope="row">10000000</td>
-                  <td>Податкові надходження</td>
-                  <td>40 430 748 000.00</td>
-                  <td>6 473 583 004.16</td>
-                  <td>16.01</td>
-                </tr>
-                <tr>
-                  <td scope="row">10000000</td>
-                  <td>Податкові надходження</td>
-                  <td>40 430 748 000.00</td>
-                  <td>6 473 583 004.16</td>
-                  <td>16.01</td>
-                </tr>
+                {tableRow}
               </tbody>
             </table>
     let realizationDiagram =  <PieChart width={800} height={400} onMouseEnter={this.onPieEnter}>
@@ -217,7 +182,6 @@ export default class Income extends Component {
                   }
                 </Pie>
               </PieChart>
-    console.log(this.state.data)
     if (this.state.structureFlag){
       return
         <div className="page-wrapper income__page">
@@ -242,7 +206,7 @@ export default class Income extends Component {
                   <li><a href="">КЛАСТЕРИЗАЦІЯ</a></li>
                 </ul>
               </nav>
-              <h3>Бюджет м. {this.state.city}</h3>
+              <h3>Бюджет м. {this.props.location.state.city}</h3>
               <div className="buttons-top">
                 <button className="send1" name="explanation" onClick={this.handleClick}>ВИКОНАННЯ БЮДЖЕТУ         
                 </button>
@@ -337,7 +301,7 @@ export default class Income extends Component {
                 <li><a href="">КЛАСТЕРИЗАЦІЯ</a></li>
               </ul>
             </nav>
-            <h3>Бюджет м. {this.state.city}</h3>
+            <h3>Бюджет м. {this.props.location.state.city}</h3>
             <div className="buttons-top">
               <button className="send1" name="explanation" onClick={this.handleClick}>ВИКОНАННЯ БЮДЖЕТУ         
               </button>
@@ -351,27 +315,26 @@ export default class Income extends Component {
                   <p>Рік:</p>
                   <p>За період:</p>
                   <p></p>
-                  <p>Фонд:</p>
                   <p>Код:</p>
                 </div>
                 <div className="custom-select">
                   <div className="select-wrapper">
-                    <select>
+                    <select ref={this.yearSelect}>
                       <option value="" disabled defaultValue>Рік</option>
-                      <option value="1">2018</option>
-                      <option value="2">2019</option>
+                      <option value="2018">2018</option>
+                      <option value="2019">2019</option>
                     </select>
                   </div>
                   <div className="select-wrapper">
-                    <select>
+                    <select >
                       <option value="" disabled defaultValue>Початок</option>
                       <option value="1">Січень</option>
                       <option value="2">Лютий</option>
                       <option value="3">Березень</option>
-                    </select>
+                    </select >
                   </div>
                   <div className="select-wrapper">
-                    <select>
+                    <select ref={this.lastMonth}>
                       <option value="" disabled defaultValue>Кінець</option>
                       <option value="1">Січень</option>
                       <option value="2">Лютий</option>
@@ -379,15 +342,7 @@ export default class Income extends Component {
                     </select>
                   </div>
                   <div className="select-wrapper">
-                    <select>
-                      <option value="" disabled defaultValue>Фонд</option>
-                      <option value="1">Спеціальний</option>
-                      <option value="2">Загальний</option>
-                      <option value="3">Разом</option>
-                    </select>
-                  </div>
-                  <div className="select-wrapper">
-                    <select>
+                    <select ref={this.incomeCode}>
                       <option value="" disabled defaultValue>Код</option>
                       <option value="1">10000000</option>
                       <option value="2">20000000</option>
@@ -449,7 +404,7 @@ export default class Income extends Component {
                 <li><a href="">КЛАСТЕРИЗАЦІЯ</a></li>
               </ul>
             </nav>
-            <h3>Бюджет м. {this.state.city}</h3>
+            <h3>Бюджет м. {this.props.location.state.city}</h3>
             <div className="buttons-top">
               <button className="send1" name="explanation" onClick={this.handleClick}>ВИКОНАННЯ БЮДЖЕТУ         
               </button>
@@ -463,27 +418,26 @@ export default class Income extends Component {
                   <p>Рік:</p>
                   <p>За період:</p>
                   <p></p>
-                  <p>Фонд:</p>
                   <p>Код:</p>
                 </div>
                 <div className="custom-select">
                   <div className="select-wrapper">
-                    <select>
+                    <select ref={this.yearSelect}>
                       <option value="" disabled defaultValue>Рік</option>
-                      <option value="1">2018</option>
-                      <option value="2">2019</option>
+                      <option value="2018">2018</option>
+                      <option value="2019">2019</option>
                     </select>
                   </div>
                   <div className="select-wrapper">
-                    <select>
+                    <select >
                       <option value="" disabled defaultValue>Початок</option>
                       <option value="1">Січень</option>
                       <option value="2">Лютий</option>
                       <option value="3">Березень</option>
-                    </select>
+                    </select >
                   </div>
                   <div className="select-wrapper">
-                    <select>
+                    <select ref={this.lastMonth}>
                       <option value="" disabled defaultValue>Кінець</option>
                       <option value="1">Січень</option>
                       <option value="2">Лютий</option>
@@ -491,15 +445,7 @@ export default class Income extends Component {
                     </select>
                   </div>
                   <div className="select-wrapper">
-                    <select>
-                      <option value="" disabled defaultValue>Фонд</option>
-                      <option value="1">Спеціальний</option>
-                      <option value="2">Загальний</option>
-                      <option value="3">Разом</option>
-                    </select>
-                  </div>
-                  <div className="select-wrapper">
-                    <select>
+                    <select ref={this.incomeCode}>
                       <option value="" disabled defaultValue>Код</option>
                       <option value="1">10000000</option>
                       <option value="2">20000000</option>
@@ -511,7 +457,7 @@ export default class Income extends Component {
               <div className="button-send">
                 <button className="send">
                   <div className="fa-img">
-                    <p><Link to="/">ПОШУК</Link></p>
+                    <p><a onClick={this.handleSearch}>ПОШУК</a></p>
                   </div>              
                 </button>
               </div>
