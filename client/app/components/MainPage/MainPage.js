@@ -20,7 +20,7 @@ export default class MainPage extends Component {
   constructor(props){
     super(props);
     this.state = {
-      currentregion : 'Київ',
+      currentregion : 'Київська',
       loading: true,
       currentCity: 'Київ',
       cityKey: '26400100000',
@@ -55,6 +55,7 @@ export default class MainPage extends Component {
   };
   changeRegionFromMap(value){
     this.setState({currentregion: value});
+    console.log(value)
     let regionSelect = this.region.current;
     let citySelect = this.regionCity.current;
     let cityOption = citySelect.options[citySelect.selectedIndex].value;
@@ -62,7 +63,10 @@ export default class MainPage extends Component {
       currentCity: cityOption,
       cityKey: citySelect.options[citySelect.selectedIndex].dataset.key
     });
-    regionSelect.options[regionSelect.selectedIndex].value = regionSelect.option
+
+    for(let i=0; i < regionSelect.options.length; i++){
+
+    }
     for (let opt, j = 0; opt = regionSelect.options[j]; j++) {
       if (opt.value == value) {
         regionSelect.selectedIndex = j;
@@ -351,7 +355,7 @@ export default class MainPage extends Component {
            </div>
            <div className="layer1">
               <div className="layer1-top-parallax">
-                 <UkraineMap onChange = {this.changeRegionFromMap} svgref={this.svgMap} />
+                 <UkraineMap onChange = {this.changeRegionFromMap} svgref={this.svgMap} currentregion={this.state.currentregion} />
                  <div className="semiopacity">
                     <article className="card">
                        <h1 className="head"><span>Оберіть місцевий бюджет</span></h1>
