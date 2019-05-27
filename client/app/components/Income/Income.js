@@ -5,16 +5,12 @@ import {
   Link,
   Switch
 } from 'react-router-dom'
-import {
-  PieChart, Pie, Sector, Cell,
-} from 'recharts';
-const data = [
-  { name: 'Group A', value: 400 },
-  { name: 'Group B', value: 300 },
-  { name: 'Group C', value: 300 },
-  { name: 'Group D', value: 200 },
-];
+import ChartExplanation from "../Chart/ChartExplanation";
+import ChartStructure from "../Chart/ChartStructure";
 
+const columns = [
+  ['data', 91.4]
+];
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 
 
@@ -30,7 +26,18 @@ export default class Income extends Component {
       city: "Киев",
       cityKey: '26400100000',
       dataObj: "No data",
-      tableData: "No data"
+      tableData: "No data",
+      columnsExplanation: [
+        ['до уточненого річного плану', 24]
+      ],
+      columnsStructure: [
+        ['Трансферти з державного бюджету', 88.13],
+        ['Податкові надходження', 9.41],
+        ['Неподаткові надходження', 1.60],
+        ['Трансферти з місцевих бюджетів', 0.86],
+        ['Доходи від операцій з капіталом', 0.00],
+
+      ]
     };
     this.yearSelect = React.createRef();
     this.lastMonth = React.createRef();
@@ -61,22 +68,34 @@ export default class Income extends Component {
             return item;
           }
         })
-
         this.setState((state)=> {
           return {
             dataObj: data,
             tableData: dataArr
           }
         })
+
       })
       .catch(error => console.log(error));
       }
-      
-
   }
   
   handleClick(event) {
-    console.log(this.state.data);
+    let incomesArr = this.state.dataObj[0].incomes;
+    let yearSelect = this.yearSelect.current,
+        lastMonth = this.lastMonth.current,
+        incomeCode = this.incomeCode.current;
+    let dataArr = incomesArr.filter(function(item){
+      if(item.year==yearSelect.value && item.month == lastMonth.options[lastMonth.selectedIndex].value){
+        return item
+      }
+    })
+    dataArr = dataArr[0].budgetData.filter(function(item){
+      let incomeCodeVar = item.incomeCode;
+      if(incomeCodeVar[0] == incomeCode.value){
+        return item;
+      }
+    })
     if (event.target.name == "explanation"){
       this.setState({
         explanationFlag: true,
@@ -102,8 +121,6 @@ export default class Income extends Component {
     let yearSelect = this.yearSelect.current,
         lastMonth = this.lastMonth.current,
         incomeCode = this.incomeCode.current;
-    console.log("YEAR", yearSelect.value)
-    console.log("MONTH", lastMonth.options[lastMonth.selectedIndex].value)
     let dataArr = incomesArr.filter(function(item){
       if(item.year==yearSelect.value && item.month == lastMonth.options[lastMonth.selectedIndex].value){
         return item
@@ -145,46 +162,8 @@ export default class Income extends Component {
                 {tableRow}
               </tbody>
             </table>
-    let realizationDiagram =  <PieChart width={800} height={400} onMouseEnter={this.onPieEnter}>
-                <Pie
-                  data={data}
-                  cx={420}
-                  cy={200}
-                  startAngle={180}
-                  endAngle={0}
-                  innerRadius={60}
-                  outerRadius={80}
-                  fill="#8884d8"
-                  paddingAngle={5}
-                  dataKey="value"
-                >
-                  {
-                    data.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)
-                  }
-                </Pie>
-              </PieChart>
-    let structureDiagram = 
-              <PieChart width={800} height={400} onMouseEnter={this.onPieEnter}>
-                <Pie
-                  data={data}
-                  cx={420}
-                  cy={200}
-                  startAngle={180}
-                  endAngle={0}
-                  innerRadius={60}
-                  outerRadius={80}
-                  fill="#8884d8"
-                  paddingAngle={5}
-                  dataKey="value"
-                >
-                  {
-                    data.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)
-                  }
-                </Pie>
-              </PieChart>
     if (this.state.structureFlag){
-      return
-        <div className="page-wrapper income__page">
+      return <div className="page-wrapper income__page">
           <div className="layer-one">
             <div className="layer-one-top-parallax">
               <nav>
@@ -273,7 +252,7 @@ export default class Income extends Component {
                   </button>
                 </div>
               </div>
-              
+              <ChartStructure columns={this.state.columnsExplanation}/>
             </div>
          </div>
         </div>
@@ -359,24 +338,7 @@ export default class Income extends Component {
                 </button>
               </div>
             </div>
-            <PieChart width={800} height={400} onMouseEnter={this.onPieEnter}>
-                <Pie
-                  data={data}
-                  cx={420}
-                  cy={200}
-                  startAngle={180}
-                  endAngle={0}
-                  innerRadius={60}
-                  outerRadius={80}
-                  fill="#8884d8"
-                  paddingAngle={5}
-                  dataKey="value"
-                >
-                  {
-                    data.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)
-                  }
-                </Pie>
-              </PieChart>
+            <ChartExplanation columns={this.state.columnsExplanation}/>
           </div>
       </div>
     </div>
