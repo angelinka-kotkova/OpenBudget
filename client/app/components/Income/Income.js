@@ -44,6 +44,7 @@ export default class Income extends Component {
     this.incomeCode = React.createRef();
     this.handleClick = this.handleClick.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
+    this.resetFlags = this.resetFlags.bind(this);
   }
   componentDidMount () {
     if(this.props.location){
@@ -116,6 +117,12 @@ export default class Income extends Component {
       });
     }
   }
+  resetFlags(){
+    this.setState({
+      explanationFlag: false,
+      structureFlag: false,
+    })
+  }
   handleSearch(event){
     let incomesArr = this.state.dataObj[0].incomes;
     let yearSelect = this.yearSelect.current,
@@ -169,7 +176,7 @@ export default class Income extends Component {
               <nav>
                 <ul className="topmenu">
                   <li><Link to="/">ГОЛОВНА</Link></li>
-                  <li><Link to="/income" className="active">ДОХОДИ</Link>
+                  <li><Link to="/income" onClick={this.resetFlags} className="active">ДОХОДИ</Link>
                     <ul className="submenu">
                       <li><a href="">виконання бюджету</a></li>
                       <li><a href="">структура бюджету</a></li>
@@ -204,34 +211,32 @@ export default class Income extends Component {
                   </div>
                   <div className="custom-select">
                     <div className="select-wrapper">
-                      <select>
+                      <select disabled>
                         <option value="" disabled defaultValue>Рік</option>
                         <option value="1">2018</option>
-                        <option value="2">2019</option>
                       </select>
                     </div>
                     <div className="select-wrapper">
-                      <select>
+                      <select disabled>
                         <option value="" disabled defaultValue>Початок</option>
                         <option value="1">Січень</option>
-                        <option value="2">Лютий</option>
-                        <option value="3">Березень</option>
                       </select>
                     </div>
-                    <div className="select-wrapper">
+                    <div className="select-wrapper"  ref={this.lastMonth}>
                       <select>
                         <option value="" disabled defaultValue>Кінець</option>
                         <option value="1">Січень</option>
                         <option value="2">Лютий</option>
                         <option value="3">Березень</option>
-                      </select>
-                    </div>
-                    <div className="select-wrapper">
-                      <select>
-                        <option value="" disabled defaultValue>Фонд</option>
-                        <option value="1">Спеціальний</option>
-                        <option value="2">Загальний</option>
-                        <option value="3">Разом</option>
+                        <option value="4">Квітень</option>
+                        <option value="5">Травень</option>
+                        <option value="6">Червень</option>
+                        <option value="7">Липень</option>
+                        <option value="8">Серпень</option>
+                        <option value="9">Вересень</option>
+                        <option value="10">Жовтень</option>
+                        <option value="11">Листопад</option>
+                        <option value="12">Грудень</option>
                       </select>
                     </div>
                     <div className="select-wrapper">
@@ -239,7 +244,6 @@ export default class Income extends Component {
                         <option value="" disabled defaultValue>Код</option>
                         <option value="1">10000000</option>
                         <option value="2">20000000</option>
-                        <option value="3">30000000</option>
                       </select>
                     </div>
                   </div>
@@ -305,19 +309,26 @@ export default class Income extends Component {
                     </select>
                   </div>
                   <div className="select-wrapper">
-                    <select >
+                    <select disabled>
                       <option value="" disabled defaultValue>Початок</option>
                       <option value="1">Січень</option>
-                      <option value="2">Лютий</option>
-                      <option value="3">Березень</option>
                     </select >
                   </div>
                   <div className="select-wrapper">
                     <select ref={this.lastMonth}>
-                      <option value="" disabled defaultValue>Кінець</option>
-                      <option value="1">Січень</option>
-                      <option value="2">Лютий</option>
-                      <option value="3">Березень</option>
+                        <option value="" disabled defaultValue>Кінець</option>
+                        <option value="1">Січень</option>
+                        <option value="2">Лютий</option>
+                        <option value="3">Березень</option>
+                        <option value="4">Квітень</option>
+                        <option value="5">Травень</option>
+                        <option value="6">Червень</option>
+                        <option value="7">Липень</option>
+                        <option value="8">Серпень</option>
+                        <option value="9">Вересень</option>
+                        <option value="10">Жовтень</option>
+                        <option value="11">Листопад</option>
+                        <option value="12">Грудень</option>
                     </select>
                   </div>
                   <div className="select-wrapper">
@@ -325,7 +336,6 @@ export default class Income extends Component {
                       <option value="" disabled defaultValue>Код</option>
                       <option value="1">10000000</option>
                       <option value="2">20000000</option>
-                      <option value="3">30000000</option>
                     </select>
                   </div>
                 </div>
@@ -350,7 +360,7 @@ export default class Income extends Component {
             <nav>
               <ul className="topmenu">
                 <li><Link to="/">ГОЛОВНА</Link></li>
-                <li><Link to="/income" className="active">ДОХОДИ</Link>
+                <li><Link to="/income" className="active" >ДОХОДИ</Link>
                   <ul className="submenu">
                     <li><a href="">виконання бюджету</a></li>
                     <li><a href="">структура бюджету</a></li>
@@ -391,27 +401,33 @@ export default class Income extends Component {
                     </select>
                   </div>
                   <div className="select-wrapper">
-                    <select >
+                    <select disabled>
                       <option value="" disabled defaultValue>Початок</option>
                       <option value="1">Січень</option>
-                      <option value="2">Лютий</option>
-                      <option value="3">Березень</option>
                     </select >
                   </div>
                   <div className="select-wrapper">
-                    <select ref={this.lastMonth}>
-                      <option value="" disabled defaultValue>Кінець</option>
-                      <option value="1">Січень</option>
-                      <option value="2">Лютий</option>
-                      <option value="3">Березень</option>
-                    </select>
+                      <select ref={this.lastMonth}>
+                        <option value="" disabled defaultValue>Кінець</option>
+                        <option value="1">Січень</option>
+                        <option value="2">Лютий</option>
+                        <option value="3">Березень</option>
+                        <option value="4">Квітень</option>
+                        <option value="5">Травень</option>
+                        <option value="6">Червень</option>
+                        <option value="7">Липень</option>
+                        <option value="8">Серпень</option>
+                        <option value="9">Вересень</option>
+                        <option value="10">Жовтень</option>
+                        <option value="11">Листопад</option>
+                        <option value="12">Грудень</option>
+                      </select>
                   </div>
                   <div className="select-wrapper">
                     <select ref={this.incomeCode}>
                       <option value="" disabled defaultValue>Код</option>
                       <option value="1">10000000</option>
                       <option value="2">20000000</option>
-                      <option value="3">30000000</option>
                     </select>
                   </div>
                 </div>

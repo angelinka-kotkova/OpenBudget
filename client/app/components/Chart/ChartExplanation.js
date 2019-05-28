@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-const c3 = require('../../vendor/c3')
 const d3 = require('../../vendor/d3')
+const c3 = require('../../vendor/c3')
 export default class ChartExplanation extends Component {
     componentDidMount() {
       this._updateChart();

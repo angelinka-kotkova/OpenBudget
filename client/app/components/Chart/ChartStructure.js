@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-const c3 = require('../../vendor/c3')
 const d3 = require('../../vendor/d3')
+const c3 = require('../../vendor/c3')
+
 export default class ChartStructure extends Component {
     componentDidMount() {
       this._updateChart();
@@ -19,12 +20,17 @@ export default class ChartStructure extends Component {
           ],
           type: "donut"
         },
+        color: {
+            pattern: ['#516696', '#516696', '#516696', '#516696'], // the three color levels for the percentage values.
+            threshold: {
+                values: [30, 60, 90, 100]
+            }
+        },
       });
     }
     render() {
       return <div className="chart__container">
         <div id="chartStructure">hi</div>
-
       </div>
     }
 }
